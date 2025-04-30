@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numpy import *
 import numexpr as ne
-from easyocr import Reader
-#from pypdf import PdfReader
+#from easyocr import Reader
+from pypdf import PdfReader
 import re
 from mpl_toolkits.mplot3d import Axes3D
 def safe_evaluate(expr, variables=None):
