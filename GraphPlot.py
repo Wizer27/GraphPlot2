@@ -63,8 +63,10 @@ with st.sidebar:
     x_max = st.number_input("Максимум", value=10)
     steps = st.slider("Количество точек", 50, 500)
     grid = st.checkbox("Сетка")
+    col1, col2 = st.columns([0.2, 4])
     function = st.text_input("Формула", value='x') + ' '
-    fun2 = st.text_input("Формула", value='')   
+    fun2 = st.text_input("Формула", value='') 
+
     file = st.file_uploader("Выбрать формулу из файла")         
     description = st.empty()
     if 'sin' in function:
@@ -86,7 +88,7 @@ with st.sidebar:
 x = linspace(x_min, x_max, steps)        
 def d3_grafic():
     x4 = np.linspace(x_min,x_max,steps)
-    y4 = safe_evaluate(replace_abs_notation(function), {'x': x})
+    y4 = safe_evaluate(replace_abs_notation(function.lower()), {'x': x})
     x4, y4 = np.meshgrid(x, y4)
     z = np.sin(np.sqrt((x4 ** 2) + (y4 ** 2)))
     fiig = plt.figure()
@@ -101,7 +103,7 @@ print(function)
 ######Нейросеть######
 # Вычисления (с заменой ne.evaluate на safe_evaluate)
 try:
-    y = safe_evaluate(replace_abs_notation(function), {'x': x})
+    y = safe_evaluate(replace_abs_notation(function.lower()), {'x': x})
 except Exception as e:
     st.error(f"Ошибка в формуле: {e}")
     y = np.zeros_like(x) 
@@ -109,7 +111,7 @@ except Exception as e:
 if fun2 != '':
     fun2 = fun2 + ' '
     try:
-        y2 = safe_evaluate(replace_abs_notation(fun2), {'x': x})
+        y2 = safe_evaluate(replace_abs_notation(fun2.lower()), {'x': x})
     except Exception as e:
         st.error(f"Ошибка в формуле: {e}")
         y2 = np.zeros_like(x)        
