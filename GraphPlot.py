@@ -63,7 +63,7 @@ with st.sidebar:
     x_max = st.number_input("Максимум", value=10)
     steps = st.slider("Количество точек", 50, 500)
     grid = st.checkbox("Сетка")
-    col1, col2 = st.columns([0.2, 4])
+    #col1, col2 = st.columns([0.2, 4])
     function = st.text_input("Формула", value='x') + ' '
     fun2 = st.text_input("Формула", value='') 
 
