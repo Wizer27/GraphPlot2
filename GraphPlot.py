@@ -86,7 +86,7 @@ with st.sidebar:
     else:
         description.text("")  
 x = linspace(x_min, x_max, steps)        
-def d3_grafic():
+def d3_grafic(function,fun2):
     x4 = np.linspace(x_min,x_max,steps)
     y4 = safe_evaluate(replace_abs_notation(function.lower()), {'x': x})
     x4, y4 = np.meshgrid(x, y4)
@@ -96,7 +96,7 @@ def d3_grafic():
     ax.plot_surface(x4, y4, z, cmap='viridis')
     st.pyplot(fiig)            
 d2 = st.button('3d') # Поменял специально метстами немного запутанно (Знаю, так надо)     
-d3 = st.button('2d',on_click = d3_grafic()) 
+d3 = st.button('2d',on_click = d3_grafic(function,fun2)) 
 
 print(replace_abs_notation(function))
 print(function)
