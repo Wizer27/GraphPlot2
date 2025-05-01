@@ -4,12 +4,20 @@ import plotly.figure_factory as ff
 
 # Add histogram data
 with st.sidebar:
+    st.markdown("""
+### 📊 Data Distribution Visualizer
+
+This app allows you to generate and compare random data distributions.  
+You can adjust the number of values for each group, name them, and instantly see how their distributions differ.  
+Perfect for statistics learning, simulation, or visualizing randomized data.
+""")
     x12 = st.text_input("Enter the value1: ",value = 20)
     x22 = st.text_input("Enter the value2: ",value = 20)
     x32 = st.text_input("Enter the value3: ",value = 20)
     x1 =  np.random.randn(int(x12)) - 2
     x2 = np.random.randn(int(x22))
     x3 = np.random.randn(int(x32)) + 2
+    
 # Group data together
     hist_data = [x1, x2, x3]
 

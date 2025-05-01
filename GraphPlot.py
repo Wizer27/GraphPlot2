@@ -151,7 +151,6 @@ if file != None:
             text = ""
             for page in reader.pages:
                 text += page.extract_text()
-            print(text)
             if 'sin' in text:
                 print("Sin in text")
                 #x2 = linspace(x_min,x_max,steps)
@@ -164,6 +163,19 @@ if file != None:
             #fig2 = plt.figure()
             plt.plot(x,y3)    
             #st.pyplot(figure)
+        if 'txt' in name:
+            with open(file.name,'r') as file:
+                c = file.read()
+            print(c)    
+            if 'sin' in c:
+                try:
+                    print('txt is here')
+                    y3 = safe_evaluate(replace(c),{'x':x})
+                except Exception as e:
+                    st.error(f"Ошибка в формуле {e}")
+                    y3 = np.zeros_like(x)
+                plt.plot(x,y3)    
+                        
 def test():
     pass
         
