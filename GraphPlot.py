@@ -85,12 +85,13 @@ with st.sidebar:
         description.text("Линейная функция - вида kx + b, некоторые переменные могут отсутствовать.")   
     else:
         description.text("")  
-x = linspace(x_min, x_max, steps)        
+x = linspace(x_min, x_max, steps)  
+      
 def d3_grafic(function,fun2):
     x4 = np.linspace(x_min,x_max,steps)
     y4 = safe_evaluate(replace_abs_notation(function.lower()), {'x': x})
     x4, y4 = np.meshgrid(x, y4)
-    z = np.sin(np.sqrt((x4 ** 2) + (y4 ** 2)))
+    z = np.sin(np.sqrt(x4**2 + y4 **2))
     fiig = plt.figure()
     ax = fiig.add_subplot(111, projection='3d')
     ax.plot_surface(x4, y4, z, cmap='viridis')
@@ -125,7 +126,7 @@ if fun2 != '':
 y0 = np.asarray([0] * len(x))
 plt.plot(x, y0, color='black')
 plt.plot(y0, x, color='black')
-
+print(len(x))
 if grid:
     plt.grid()
 
@@ -153,15 +154,15 @@ if file != None:
             text = ""
             for page in reader.pages:
                 text += page.extract_text()
-            if 'sin' in text:
-                print("Sin in text")
-                #x2 = linspace(x_min,x_max,steps)
-                try:
-                    print('Working')
-                    y3 = safe_evaluate(replace(text),{'x':x})
-                except Exception as e:
-                    st.error(f"Ошибка в формуле {e}")
-                    y3 = np.zeros_like(x)
+            
+            print("PLotig from file.......")
+            #x2 = linspace(x_min,x_max,steps)
+            try:
+                print('Working')
+                y3 = safe_evaluate(replace(text),{'x':x})
+            except Exception as e:
+                st.error(f"Ошибка в формуле {e}")
+                y3 = np.zeros_like(x)
             #fig2 = plt.figure()
             plt.plot(x,y3)    
             #st.pyplot(figure)
@@ -180,5 +181,6 @@ if file != None:
                         
 def test():
     pass
+
         
 st.pyplot(figure)    

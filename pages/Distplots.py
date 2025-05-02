@@ -19,7 +19,7 @@ Perfect for statistics learning, simulation, or visualizing randomized data.
     x3 = np.random.randn(int(x32)) + 2
     
 # Group data together
-    hist_data = [x1, x2, x3]
+    hist_data = [x1,x2,x3]
 
     group_labels = [st.text_input("Name the value1: "), st.text_input("Name the value2:"), st.text_input("Name the value3:")]
 
