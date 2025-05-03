@@ -179,7 +179,9 @@ if file != None:
                 except Exception as e:
                     st.error(f"Ошибка в формуле {e}")
                     y3 = np.zeros_like(x)
-                plt.plot(x,y3)    
+                plt.plot(x,y3)  
+        else:
+            st.error("This file type is not supported yet.")          
                         
 def test():
     pass
