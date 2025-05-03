@@ -59,8 +59,8 @@ def replace(expression):
 # Streamlit интерфейс (без изменений)
 
 with st.sidebar:
-    x_min = st.number_input("Минимум", value=-10)
-    x_max = st.number_input("Максимум", value=10)
+    x_min = st.number_input("Минимум", value=-20)
+    x_max = st.number_input("Максимум", value=20)
     steps = st.slider("Количество точек", 50, 500)
     grid = st.checkbox("Сетка")
     #col1, col2 = st.columns([0.2, 4])
@@ -123,10 +123,13 @@ plt.plot(x, y)
 if fun2 != '':
     plt.plot(x, y2)    
 
-y0 = np.asarray([0] * len(x))
-plt.plot(x, y0, color='black')
-plt.plot(y0, x, color='black')
-print(len(x))
+#y0 = np.asarray([0] * len(x))
+#plt.plot(x, y0, color='black')
+#plt.plot(y0, x, color='black')
+#print("Len x: ",len(x))
+#print("y0: ",y0)
+plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
+plt.axvline(0, color='black', linewidth=1)
 if grid:
     plt.grid()
 
