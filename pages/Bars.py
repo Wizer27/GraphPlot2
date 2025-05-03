@@ -10,3 +10,4 @@ with st.sidebar:
     n3 = st.text_input("Name3: ",placeholder = 'Enter the name3')
 plt.bar([n1,n2,n3], [float(val1), float(val2), float(val3)])
 st.pyplot(fig)
+#Made an update
