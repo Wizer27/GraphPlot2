@@ -56,8 +56,7 @@ def replace(expression):
     expression = expression.replace('^', '**')
     return expression
 
-# Streamlit интерфейс (без изменений)
-
+# Streamlit интерфейс (без изменений)   
 with st.sidebar:
     x_min = st.number_input("Минимум", value=-20)
     x_max = st.number_input("Максимум", value=20)
