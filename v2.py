@@ -56,21 +56,19 @@ def replace(expression):
     # Замена ^ на **
     expression = expression.replace('^', '**')
     return expression
-figure = plt.figure()
-plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
-plt.axvline(0, color='black', linewidth=1)
 # Streamlit интерфейс (без изменений)   
 with st.sidebar:
     x_min = st.number_input("Минимум", value=-20)
     x_max = st.number_input("Максимум", value=20)
-    count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     steps = st.slider("Количество точек", 50, 500)
+    d_gr = st.text_input("Enter the fucntion for 3d plot:",value = 'x')
     grid = st.checkbox("Сетка")
     x = linspace(x_min, x_max, steps) 
     #col1, col2 = st.columns([0.2, 4])
     #function = st.text_input("Формула", value='x') + ' '
     #fun2 = st.text_input("Формула", value='') 
     ys = []
+    count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     for i in range(count):
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
         if forl != '':  
@@ -94,17 +92,15 @@ with st.sidebar:
     else:
         description.text("")   
       
-def d3_grafic(function):
-    x4 = np.linspace(x_min,x_max,steps)
-    y4 = safe_evaluate(replace_abs_notation(str(ys[0]).lower()), {'x': x})
-    x4, y4 = np.meshgrid(x, y4)
-    z = np.sin(np.sqrt(x4**2 + y4 **2))
-    fiig = plt.figure()
-    ax = fiig.add_subplot(111, projection='3d')
-    ax.plot_surface(x4, y4, z, cmap='viridis')
-    st.pyplot(fiig)            
-#d2 = st.button('3d') # Поменял специально метстами немного запутанно (Знаю, так надо)     
-#d3 = st.button('2d',on_click = d3_grafic(ys[0])) 
+# ======== 3D ГРАФИК ========
+x4 = np.linspace(x_min,x_max,steps)
+y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
+x4, y4 = np.meshgrid(x, y4)
+z = np.sin(np.sqrt(x4**2 + y4 **2))
+fiig = plt.figure()
+ax = fiig.add_subplot(111, projection='3d')
+ax.plot_surface(x4, y4, z, cmap='viridis')
+st.pyplot(fiig)             
 
 
 
@@ -185,7 +181,12 @@ if file != None:
                         
 def test():
     pass
+# ======== 2D ГРАФИК ========
+figure = plt.figure()
+plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
+plt.axvline(0, color='black', linewidth=1)
 for i in ys:
     plt.plot(x,i)
         
 st.pyplot(figure)    
+ 
