@@ -72,7 +72,12 @@ with st.sidebar:
     for i in range(count):
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
         if forl != '':  
-            ys.append(safe_evaluate(replace(forl),{'x':x}))   
+            try:
+                
+                ys.append(safe_evaluate(replace(forl),{'x':x}))
+            except Exception as e:
+                st.error(f"No function for {e}")
+                       
     file = st.file_uploader("Выбрать формулу из файла")         
     description = st.empty()   
     if  ys and 'sin' in ys[0]:
