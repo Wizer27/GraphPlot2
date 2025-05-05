@@ -94,7 +94,11 @@ with st.sidebar:
       
 # ======== 3D ГРАФИК ========
 x4 = np.linspace(x_min,x_max,steps)
-y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
+try:
+    y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
+except Exception as e:
+    st.error(f"No function for {e}")
+    y4 = np.zeros_like(x)     
 x4, y4 = np.meshgrid(x, y4)
 z = np.sin(np.sqrt(x4**2 + y4 **2))
 fiig = plt.figure()
