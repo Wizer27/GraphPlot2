@@ -133,10 +133,11 @@ st.pyplot(fiig)
  
 
 
-
+#========= ПОСТРОЕНИЕ ГРАФИКА ИЗ ФАЙЛА ========= 
 if grid:
     plt.grid()
-
+# ===== Фигура(канвас) для  2d графика ===== 
+figure = plt.figure()
 if file != None:
         print(file)
         name = file.name.split('.')
@@ -157,6 +158,7 @@ if file != None:
                     #fig2 = plt.figure()
                    # plt.plot(x,y3)
         if 'pdf' in name:
+            print('PDF')
             reader = PdfReader(file)
             text = ""
             for page in reader.pages:
@@ -191,7 +193,6 @@ if file != None:
 def test():
     pass
 # ======== 2D ГРАФИК ========
-figure = plt.figure()
 plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
 plt.axvline(0, color='black', linewidth=1)
 for i in ys:
