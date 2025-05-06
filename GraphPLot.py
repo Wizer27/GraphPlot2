@@ -134,10 +134,10 @@ st.pyplot(fiig)
 
 
 #========= ПОСТРОЕНИЕ ГРАФИКА ИЗ ФАЙЛА ========= 
-if grid:
-    plt.grid()
 # ===== Фигура(канвас) для  2d графика ===== 
 figure = plt.figure()
+if grid:
+    plt.grid()
 if file != None:
         print(file)
         name = file.name.split('.')
