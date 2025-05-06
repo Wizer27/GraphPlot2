@@ -65,21 +65,18 @@ with st.sidebar:
     d_gr = st.text_input("Enter the fucntion for 3d plot:",value = 'x')
     grid = st.checkbox("Сетка")
     x = linspace(x_min, x_max, steps) 
-    #col1, col2 = st.columns([0.2, 4])
-    #function = st.text_input("Формула", value='x') + ' '
-    #fun2 = st.text_input("Формула", value='') 
-    ys = []
+    ys = [] #список всех формул
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     for i in range(count):
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
         if forl != '':  
             try:
-                
                 ys.append(safe_evaluate(replace(forl),{'x':x}))
             except Exception as e:
                 st.error(f"No function for {e}")
                        
     file = st.file_uploader("Выбрать формулу из файла")         
+    #Описание графиков 1 для обычного 2d графика
     description = st.empty()   
     if  ys and 'sin' in ys[0]:
         description.text("Синус - это тригонометрическая функция, которая описывает колебания.")
@@ -182,16 +179,16 @@ if file != None:
             with open(file.name,'r') as file:
                 c = file.read()
             print(c)    
-            if 'sin' in c:
-                try:
-                    print('txt is here')
-                    y3 = safe_evaluate(replace(c),{'x':x})
-                except Exception as e:
-                    st.error(f"Ошибка в формуле {e}")
-                    y3 = np.zeros_like(x)
-                plt.plot(x,y3)  
-        else:
-            st.error("This file type is not supported yet.")          
+            #if 'sin' in c:
+            try:
+                print('txt is here')
+                y3 = safe_evaluate(replace(c),{'x':x})
+            except Exception as e:
+                st.error(f"Ошибка в формуле {e}")
+                y3 = np.zeros_like(x)
+            plt.plot(x,y3)  
+        if 'txt' not in  name and 'pdf' not in name:
+            st.error("This file type is not supported yet")           
                         
 def test():
     pass
