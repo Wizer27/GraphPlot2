@@ -73,24 +73,24 @@ with st.sidebar:
             try:
                 ys.append(safe_evaluate(replace(forl),{'x':x}))
             except Exception as e:
-                st.error(f"No function for {e}")
-                       
+                st.error(f"No function for {e}")                   
     file = st.file_uploader("Chose a formula from file")         
     #Описание графиков 1 для обычного 2d графика
     description = st.empty()   
-    if  ys and 'sin' in ys[0]:
+    if  'sin' in forl:
+        print('Синус')
         description.text("Синус - это тригонометрическая функция, которая описывает колебания.")
-    elif ys and 'cos' in ys[0]:
+    elif 'cos' in forl:
         description.text("Косинус - это тригонометрическая функция, которая также описывает колебания, но со сдвигом фазы.")
-    elif ys and 'tan' in ys[0]:
+    elif 'tan' in forl:
         description.text("Тангенс - это тригонометрическая функция, которая описывает отношение синуса к косинусу.")
-    elif ys and 'exp' in ys[0]:
+    elif 'exp' in forl:
         description.text("Экспонента - это функция, которая описывает экспоненциальный рост или затухание.")
-    elif ys and'log' in ys[0]:
+    elif 'log' in forl:
         description.text("Логарифм - это функция, обратная экспоненте, которая описывает рост или затухание в логарифмической шкале.")
-    elif ys and 'sqrt' in ys[0]:
+    elif 'sqrt' in forl:
         description.text("Квадратный корень - это функция, которая возвращает квадратный корень из числа.")
-    elif ys and ('sin' not in ys[0] and 'cos' not in ys[0] and 'tan' not in ys[0] and 'exp' not in ys[0] and 'log' not in ys[0] and 'sqrt' not in ys[0]):
+    elif 'sin' not in forl and 'cos' not in forl  and 'tan' not in forl and 'exp' not in forl and 'log' not in forl and 'sqrt' not in forl:
         description.text("Линейная функция - вида kx + b, некоторые переменные могут отсутствовать.")   
     else:
         description.text("")   
