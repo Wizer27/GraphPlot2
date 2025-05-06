@@ -57,6 +57,7 @@ def replace(expression):
     expression = expression.replace('^', '**')
     return expression
 # Streamlit интерфейс (без изменений)   
+
 with st.sidebar:
     x_min = st.number_input("Минимум", value=-20)
     x_max = st.number_input("Максимум", value=20)
@@ -110,6 +111,8 @@ fiig = plt.figure()
 ax = fiig.add_subplot(111, projection='3d')
 ax.plot_surface(x4, y4, z, cmap='viridis')
 st.pyplot(fiig)             
+
+
 
 
 
@@ -192,6 +195,7 @@ if file != None:
                         
 def test():
     pass
+
 # ======== 2D ГРАФИК ========
 plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
 plt.axvline(0, color='black', linewidth=1)
