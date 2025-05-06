@@ -6,3 +6,4 @@ fig = plt.figure()
 plt.hist(data,bins = 30)
 plt.title("Histogramm")
 st.pyplot(fig)
+### New page
