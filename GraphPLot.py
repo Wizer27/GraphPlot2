@@ -59,11 +59,11 @@ def replace(expression):
 # Streamlit интерфейс (без изменений)   
 
 with st.sidebar:
-    x_min = st.number_input("Минимум", value=-20)
-    x_max = st.number_input("Максимум", value=20)
-    steps = st.slider("Количество точек", 50, 500)
+    x_min = st.number_input("Minimum", value=-20)
+    x_max = st.number_input("Maximum", value=20)
+    steps = st.slider("Amount of dots", 50, 500)
     d_gr = st.text_input("Enter the fucntion for 3d plot:",value = 'x')
-    grid = st.checkbox("Сетка")
+    grid = st.checkbox("Grid")
     x = linspace(x_min, x_max, steps) 
     ys = [] #список всех формул
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
@@ -75,7 +75,7 @@ with st.sidebar:
             except Exception as e:
                 st.error(f"No function for {e}")
                        
-    file = st.file_uploader("Выбрать формулу из файла")         
+    file = st.file_uploader("Chose a formula from file")         
     #Описание графиков 1 для обычного 2d графика
     description = st.empty()   
     if  ys and 'sin' in ys[0]:
@@ -170,7 +170,7 @@ if file != None:
                 print('Working')
                 y3 = safe_evaluate(replace(text),{'x':x})
             except Exception as e:
-                st.error(f"Ошибка в формуле {e}")
+                st.error(f"Error  in the formula {e}")
                 y3 = np.zeros_like(x)
             #fig2 = plt.figure()
             plt.plot(x,y3)    
@@ -184,7 +184,7 @@ if file != None:
                 print('txt is here')
                 y3 = safe_evaluate(replace(c),{'x':x})
             except Exception as e:
-                st.error(f"Ошибка в формуле {e}")
+                st.error(f"Error in the formula {e}")
                 y3 = np.zeros_like(x)
             plt.plot(x,y3)  
         if 'txt' not in  name and 'pdf' not in name:
