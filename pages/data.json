@@ -1,5 +1,14 @@
 [
     {
+        "formula": "sin(x)"
+    },
+    {
+        "formula": "cos(x)"
+    },
+    {
         "formula": "log(x)"
+    },
+    {
+        "formula": "x - 10"
     }
 ]

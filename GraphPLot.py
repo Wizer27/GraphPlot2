@@ -73,13 +73,13 @@ with st.sidebar:
     x = linspace(x_min, x_max, steps) 
     ys = [] #список всех формул
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
+    logs = []
     for i in range(count):
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
         if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
             
             with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','r') as file:
                 data = json.load(file)
-            logs = []
             logs.append({
                 "formula":forl
             })
