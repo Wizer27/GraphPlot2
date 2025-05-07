@@ -7,7 +7,7 @@ import numexpr as ne
 from pypdf import PdfReader
 import re
 from mpl_toolkits.mplot3d import Axes3D
-
+import json
 def safe_evaluate(expr, variables=None):
     """Безопасная замена ne.evaluate() с ограниченным набором функций"""
     allowed_functions = {
@@ -69,6 +69,8 @@ with st.sidebar:
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     for i in range(count):
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
+        with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','r') as file:
+            data = json.load(file)
         if forl != '':  
             try:
                 ys.append(safe_evaluate(replace(forl),{'x':x}))
