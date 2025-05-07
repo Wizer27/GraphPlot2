@@ -1,0 +1,19 @@
+[
+    {
+      "formula": "x**2",
+      "x_min": -10,
+      "x_max": 10,
+      "steps": 100,
+      "plot_type": "2D",
+      "created_at": "2025-05-06T15:32:10"
+    },
+    {
+      "formula": "sin(x)",
+      "x_min": -3.14,
+      "x_max": 3.14,
+      "steps": 200,
+      "plot_type": "2D",
+      "created_at": "2025-05-06T15:35:22"
+    }
+  ]
+  
