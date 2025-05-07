@@ -74,6 +74,7 @@ with st.sidebar:
     ys = [] #список всех формул
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     logs = []
+    # ========= БАЗА ДАННЫХ ГРАФИКОВ ========= 
     for i in range(count):
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
         if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):

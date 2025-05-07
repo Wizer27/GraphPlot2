@@ -8,7 +8,6 @@ if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
     for item in reversed(history):
          st.markdown(f"""
         - 🧮 **Formula:** `{item['formula']}`  
-        - 📈 x: [{item['x_min']} .. {item['x_max']}]  
         """)
          st.markdown("---") 
     else:
