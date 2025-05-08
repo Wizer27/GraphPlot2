@@ -12,8 +12,6 @@ import os
 
 
 
-
-
 def safe_evaluate(expr, variables=None):
     """Безопасная замена ne.evaluate() с ограниченным набором функций"""
     allowed_functions = {

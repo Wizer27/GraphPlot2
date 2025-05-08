@@ -12,4 +12,4 @@ if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
          st.markdown("---") 
     else:
         st.info("History is empty")
-                
+             
