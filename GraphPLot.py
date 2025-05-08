@@ -109,7 +109,7 @@ with st.sidebar:
         description.text("Линейная функция - вида kx + b, некоторые переменные могут отсутствовать.")   
     else:
         description.text("")   
-      
+   
 # ======== 3D ГРАФИК ========
 x4 = np.linspace(x_min,x_max,steps)
 try:
