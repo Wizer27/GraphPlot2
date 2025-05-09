@@ -82,13 +82,15 @@ with st.sidebar:
             logs.append({
                 "formula":forl
             })
-            with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','w') as file:
-                json.dump(logs,file,indent = 4)    
+            #with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','w') as file:
+                #json.dump(logs,file,indent = 4)    
         if forl != '':  
             try:
                 ys.append(safe_evaluate(replace(forl),{'x':x}))
             except Exception as e:
-                st.error(f"No function for {e}")                   
+                st.error(f"No function for {e}")
+    with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','w') as file:
+        json.dump(logs,file,indent = 4)                                
     file = st.file_uploader("Chose a formula from file")         
     #Описание графиков 1 для обычного 2d графика
     description = st.empty()   

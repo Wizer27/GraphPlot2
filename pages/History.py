@@ -10,6 +10,6 @@ if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
         - 🧮 **Formula:** `{item['formula']}`  
         """)
          st.markdown("---") 
-    else:
+    if not history:
         st.info("History is empty")
              
