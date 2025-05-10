@@ -200,7 +200,7 @@ if file != None:
             for page in reader.pages:
                 text += page.extract_text()
             
-            print("PLotig from file.......")
+            print("PLoting from file.......")
             #x2 = linspace(x_min,x_max,steps)
             try:
                 print('Working')
