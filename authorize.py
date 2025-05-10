@@ -7,7 +7,7 @@ def load():
 def autor(username,password):
     users = load()
     print(users)
-    if username in users:
+    if username in users and  users[username] == password:
         return True
     return False   
 def evens(iterable: iter) -> list:
