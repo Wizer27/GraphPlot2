@@ -25,6 +25,9 @@ if not st.session_state.logged_in:
             #st.experimental_rerun()  # Обновляем страницу
         else:
             st.error("Неверный логин или пароль")
+    o = st.text('Or')
+    st.button('Create new account') 
+             
     st.stop()  # 🔒 Без входа — ничего не запускается дальше
 
 # 🟢 Если авторизован — запускаем интерфейс приложения
@@ -225,7 +228,7 @@ if file != None:
             st.error("This file type is not supported yet")           
                         
 def test():
-    pass
+    assert replace('|x-10| + 3x')
 
 # ======== 2D ГРАФИК ========
 plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
