@@ -251,4 +251,3 @@ for i in ys:
     plt.plot(x,i)
         
 st.pyplot(figure)  
-  
