@@ -25,8 +25,22 @@ if not st.session_state.logged_in:
             #st.experimental_rerun()  # Обновляем страницу
         else:
             st.error("Неверный логин или пароль")
+    def on_pr():
+        if 'register' not in st.session_state:
+            st.session_state.register = False
+        if not st.session_state.register:
+            st.title("Create new account")
+            username = st.text_input('Username:',placeholder='Enter the username')
+            pasword = st.text_input('Password',placeholder='Enter the password',type = 'password')
+            pasword2 = st.text_input('Reenter',placeholder='Reenter the password',type = 'password')
+            if pasword != pasword2:
+                st.error('Passwords doesnt math')
+            else:
+                st.success('You created an account')  
+                st.session_state.register = True
+                st.session_state.username = username           
     o = st.text('Or')
-    st.button('Create new account') 
+    st.button('Create new account',on_click=on_pr) 
              
     st.stop()  # 🔒 Без входа — ничего не запускается дальше
 
