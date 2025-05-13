@@ -10,9 +10,12 @@ from mpl_toolkits.mplot3d import Axes3D
 import json
 import os
 import random 
+from authorize import autor # файлик с авторизацией
+# ===== LOGIN PAGE =====
 
-from authorize import autor
-# ===== LOGIN PAGE ===== 
+
+
+ 
 def register_user(username, password):
     if 'users' not in st.session_state:
         st.session_state.users = {}
@@ -291,7 +294,8 @@ plt.axvline(0, color='black', linewidth=1)
 for i in ys:
     plt.plot(x,i)
         
-st.pyplot(figure)  
+st.pyplot(figure) 
+# биотовая функция просто для кодировки  
 def bits_machine(s) -> str:
     res = ''
     for i in s:
