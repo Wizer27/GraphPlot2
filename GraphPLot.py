@@ -9,6 +9,7 @@ import re
 from mpl_toolkits.mplot3d import Axes3D
 import json
 import os
+import random 
 
 from authorize import autor
 # ===== LOGIN PAGE ===== 
@@ -291,3 +292,13 @@ for i in ys:
     plt.plot(x,i)
         
 st.pyplot(figure)  
+def bits_machine(s) -> str:
+    res = ''
+    for i in s:
+        if i.isdigit():
+            res += '1'
+        if i.isalpha():
+            res += '0'
+        else:
+            res += str(random.randint(2,100))
+    return res                
