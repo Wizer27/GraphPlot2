@@ -305,4 +305,6 @@ def bits_machine(s) -> str:
             res += '0'
         else:
             res += str(random.randint(2,100))
-    return res                
+    return res   
+
+             
