@@ -4,7 +4,6 @@ from email.utils import formataddr
 
 
 
-
 server = "smtp.gmail.com" 
 port = 587
 email = 'some email'
@@ -31,3 +30,4 @@ try:
     print("Mail sent!")
 except Exception as e:
     print(f"Error: {e}")
+    
