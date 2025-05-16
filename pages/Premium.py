@@ -2,7 +2,9 @@ import streamlit as st
 
 
 st.title('Buy premium subcription')
-
-st.button('Confirm')
+def test():
+    s = {}
+    return hash(s)
+st.button('Confirm',on_click=test)
 
 ### Make a pay page 
