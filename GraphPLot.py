@@ -153,20 +153,19 @@ with st.sidebar:
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     logs = []
     # ========= БАЗА ДАННЫХ ГРАФИКОВ ========= 
+    with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','r') as file:
+        data = json.load(file)
     for i in range(count):
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
-        if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
-            
-            with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','r') as file:
-                data = json.load(file)
-            logs.append({
-                "formula":forl
-            })    
-        if forl != '':  
-            try:
-                ys.append(safe_evaluate(replace(forl),{'x':x}))
-            except Exception as e:
-                st.error(f"No function for {e}")
+        logs.append({
+            "formula":forl
+        })    
+    print(logs)    
+    if forl != '':  
+        try:
+            ys.append(safe_evaluate(replace(forl),{'x':x}))
+        except Exception as e:
+            st.error(f"No function for {e}")
     with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','w') as file:
         json.dump(logs ,file,indent = 4)                                
     file = st.file_uploader("Chose a formula from file")         
