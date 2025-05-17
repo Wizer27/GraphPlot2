@@ -159,8 +159,7 @@ with st.sidebar:
         forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
         logs.append({
             "formula":forl
-        })    
-    print(logs)    
+        })       
     if forl != '':  
         try:
             ys.append(safe_evaluate(replace(forl),{'x':x}))
