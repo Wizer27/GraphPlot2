@@ -34,10 +34,11 @@ for user in data:
 
 
 if not user_ex:
-    data.append({
-        "username":us,
-        "formulas":formulas
-    })    
+    if us != '' and formulas != []:
+        data.append({
+            "username":us,
+            "formulas":formulas
+        })    
 
 
 
