@@ -31,7 +31,7 @@ if 'show_register' not in st.session_state:
     
     
     
-    
+us2 = ''    
 if not st.session_state.logged_in:
     # Переключатель между формами входа и регистрации
     if st.session_state.show_register:
@@ -74,7 +74,7 @@ if not st.session_state.logged_in:
         st.title("🔒 Вход в систему")
         username = st.text_input("Логин")
         password = st.text_input("Пароль", type="password")
-        
+        us2 = username
         if st.button("Войти"):
             if autor(username, password):
                 st.session_state.logged_in = True
@@ -90,8 +90,7 @@ if not st.session_state.logged_in:
     st.stop()
 
 # Основной интерфейс после авторизации
-st.success(f"✅ Добро пожаловать, {st.session_state.username}!")    
-    
+st.success(f"✅ Добро пожаловать, {st.session_state.username}!")       
 def safe_evaluate(expr, variables=None):
     """Безопасная замена ne.evaluate() с ограниченным набором функций"""
     allowed_functions = {
@@ -153,20 +152,29 @@ with st.sidebar:
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     logs = []
     # ========= БАЗА ДАННЫХ ГРАФИКОВ ========= 
-    with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','r') as file:
-        data = json.load(file)
+    formulas = []
     for i in range(count):
-        forl = st.text_input(f"Formula {i + 1}",key = f"Formula {i}")
-        logs.append({
-            "formula":forl
-        })       
-    if forl != '':  
+        forl = st.text_input(f'Enter the formula{i}',key = f"Formula{i}")
+        formulas.append(forl)
+    with open('dt2.json','r') as file:
         try:
-            ys.append(safe_evaluate(replace(forl),{'x':x}))
-        except Exception as e:
-            st.error(f"No function for {e}")
-    with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json','w') as file:
-        json.dump(logs ,file,indent = 4)                                
+            data = json.load(file)
+        except:
+            print('Loading is not working')
+    user_ex = False
+    for user in data:
+        if user["username"] == st.session_state.username:
+            user['formulas'] = formulas
+            user_ex = True
+    if not user_ex:
+        if st.session_state.username != '' and formulas != []:
+            data.append({
+                "username":st.session_state.username,
+                "formulas":formulas
+            })
+    with open('dt2.json','w') as file:
+        json.dump(data,file,indent=2,ensure_ascii=False)                
+                           
     file = st.file_uploader("Chose a formula from file")         
     #Описание графиков 1 для обычного 2d графика
     description = st.empty()   

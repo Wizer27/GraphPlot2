@@ -44,7 +44,7 @@ if not user_ex:
 
 with open('dt2.json','w') as file:
     try:  
-        json.dump(data,file,indent=4,ensure_ascii=False)
+        json.dump(data,file,indent=2,ensure_ascii=False)
     except:
         st.error('Wrong went')    
         
