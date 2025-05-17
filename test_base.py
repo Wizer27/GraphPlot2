@@ -17,19 +17,39 @@ with open('dt2.json','r') as file:
         data = json.load(file)
     except:
         st.error('Went wrong')
-for i in range(len(formulas)):
-    try:    
-        data[str(f'formula{i}')] = formulas[i]
-    except:
-        st.error('Something went wrong')
+#for i in range(len(formulas)):
+    #try:    
+        #data[str(f'formula{i}')] = formulas[i]
+   # except:
+        #st.error('Something went wrong')
 print(data)
-with open('dt2.json','r') as file:
+
+user_ex = False
+
+for user in data:
+    if user['username'] == us:
+        user['formulas'] += formulas
+        user_ex = True
+    break
+
+
+if not user_ex:
+    data.append({
+        "username":us,
+        "formulas":formulas
+    })    
+
+
+
+with open('dt2.json','w') as file:
     try:  
-        json.dump(data,file,indent=4)
+        json.dump(data,file,indent=4,ensure_ascii=False)
     except:
         st.error('Wrong went')    
         
-        
+print(data)
+
+print(formulas)        
 
 
     

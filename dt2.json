@@ -1,3 +1,28 @@
-{
-    "formulatest":"test"
-}
+[
+    {
+        "username": "alex",
+        "formulas": [
+            "x^2 + 3",
+            "sin(x)*2",
+            "sin(x)"
+        ]
+    },
+    {
+        "username": "",
+        "formulas": [
+            ""
+        ]
+    },
+    {
+        "username": "ivan",
+        "formulas": [
+            ""
+        ]
+    },
+    {
+        "username": "ivan",
+        "formulas": [
+            "sin(x)"
+        ]
+    }
+]
