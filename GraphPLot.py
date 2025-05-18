@@ -168,7 +168,7 @@ with st.sidebar:
     user_ex = False
     for user in data:
         if user["username"] == st.session_state.username:
-            user['formulas'].extend(formulas)
+            user['formulas']+=formulas
             user_ex = True
     if not user_ex:
         if st.session_state.username != '' and formulas != []:
