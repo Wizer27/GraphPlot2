@@ -10,9 +10,18 @@
   {
     "username": "user3",
     "formulas": [
-      "sin(x)",
       "cos(x)",
-      "log(x)"
+      "x - 10",
+      "x + 10",
+      "sin(x)"
+    ]
+  },
+  {
+    "username": "user2",
+    "formulas": [
+      "x - 10",
+      "x + 5",
+      ""
     ]
   }
 ]
