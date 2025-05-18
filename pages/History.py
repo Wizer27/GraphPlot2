@@ -94,4 +94,5 @@ if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
          st.markdown("---") 
     if not history:
         st.info("History is empty")
-             
+else:
+    print('Path to the base doesnt excist')          
