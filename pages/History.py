@@ -95,4 +95,17 @@ if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
     if not history:
         st.info("History is empty")
 else:
-    print('Path to the base doesnt excist')          
+    print('Path to the base doesnt excist')    
+    
+    
+    
+    
+with open('/Users/ivanvinogradov/GraphPlot2/dt2.json','r') as file:
+    data = json.load(file)
+print(data)    
+for user in data:
+    if user.get("username") == st.session_state.username:
+        print(user["formulas"])
+        print(user["username"])  
+        break
+               
