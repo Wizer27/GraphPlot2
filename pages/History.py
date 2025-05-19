@@ -106,6 +106,8 @@ print(data)
 for user in data:
     if user.get("username") == st.session_state.username:
         print(user["formulas"])
+        print('Sorted formulas')
+        print(sorted(user["formulas"]))
         print(user["username"])  
         break
                
