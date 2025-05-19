@@ -15,7 +15,7 @@ from authorize import autor # файлик с авторизацией
 
 
 
- 
+
 def register_user(username, password):
     if 'users' not in st.session_state:
         st.session_state.users = {}
