@@ -96,12 +96,15 @@ for user in data:
     if user.get("username") == st.session_state.username:
         print('Sorted formulas')
         history = sorted(user["formulas"])
+        if history == []:
+            st.write('Your history of 2d plots is empty ')
         for item in history:
             if item != '':
                 st.markdown(f"""
                 - 🧮 **Formula:** `{item}`  
                 """)
                 st.markdown("---") 
+
             
         break
                
