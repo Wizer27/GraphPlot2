@@ -84,18 +84,7 @@ if not st.session_state.logged_in:
 st.success(f"✅ Добро пожаловать, {st.session_state.username}!")    
     
 st.title("History of plots")
-if os.path.exists('/Users/ivanvinogradov/GraphPlot2/pages/data.json'):
-    with open('/Users/ivanvinogradov/GraphPlot2/pages/data.json') as file:
-        history = json.load(file)
-    for item in reversed(history):
-         st.markdown(f"""
-        - 🧮 **Formula:** `{item['formula']}`  
-        """)
-         st.markdown("---") 
-    if not history:
-        st.info("History is empty")
-else:
-    print('Path to the base doesnt excist')    
+   
     
     
     
@@ -106,6 +95,12 @@ print(data)
 for user in data:
     if user.get("username") == st.session_state.username:
         print('Sorted formulas')
-        print(sorted(user["formulas"])) 
+        history = sorted(user["formulas"])
+        for item in history:
+            st.markdown(f"""
+            - 🧮 **Formula:** `{item}`  
+            """)
+            st.markdown("---") 
+            
         break
                

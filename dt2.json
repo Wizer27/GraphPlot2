@@ -10,7 +10,11 @@
     "username": "user3",
     "formulas": [
       "cos(x)",
-      "x - 10"
+      "x - 10",
+      "",
+      "x + 5",
+      "",
+      "log(x)"
     ]
   },
   {
