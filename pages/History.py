@@ -105,9 +105,7 @@ with open('/Users/ivanvinogradov/GraphPlot2/dt2.json','r') as file:
 print(data)    
 for user in data:
     if user.get("username") == st.session_state.username:
-        print(user["formulas"])
         print('Sorted formulas')
-        print(sorted(user["formulas"]))
-        print(user["username"])  
+        print(sorted(user["formulas"])) 
         break
                
