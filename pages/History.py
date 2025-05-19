@@ -97,10 +97,11 @@ for user in data:
         print('Sorted formulas')
         history = sorted(user["formulas"])
         for item in history:
-            st.markdown(f"""
-            - 🧮 **Formula:** `{item}`  
-            """)
-            st.markdown("---") 
+            if item != '':
+                st.markdown(f"""
+                - 🧮 **Formula:** `{item}`  
+                """)
+                st.markdown("---") 
             
         break
                
