@@ -88,7 +88,7 @@ st.title("History of plots")
     
     
     
-    
+# Запись в бд и тд проверка и вывод истории построения 2д графиков    
 with open('/Users/ivanvinogradov/GraphPlot2/dt2.json','r') as file:
     data = json.load(file)
 print(data)    
