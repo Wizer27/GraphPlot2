@@ -315,4 +315,9 @@ def bits_machine(s) -> str:
             res += str(random.randint(2,100))
     return res   
 
+def bits2(expr):
+    try:
+        return bin(expr)        
+    except:
+        return "Something went wrong"
              
