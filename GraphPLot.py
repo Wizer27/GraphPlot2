@@ -322,7 +322,8 @@ def bits2(expr):
     try:
         return bin(expr)        
     except:
-        return "Something went wrong"             
+        return "Something went wrong"     
+# декоратор для функции replace() который считает ее врямя выполнения            
 def decor(func):
     def main():
         c = datetime.now()
@@ -333,6 +334,6 @@ def decor(func):
     return main()
 print(decor(replace))        
         
-        
+       
             
     
