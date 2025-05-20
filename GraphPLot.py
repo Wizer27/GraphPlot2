@@ -10,7 +10,10 @@ from mpl_toolkits.mplot3d import Axes3D
 import json
 import os
 import random 
-from authorize import autor # файлик с авторизацией
+from authorize import autor
+from datetime import datetime
+import time
+# файлик с авторизацией
 # ===== LOGIN PAGE =====
 
 
@@ -319,5 +322,17 @@ def bits2(expr):
     try:
         return bin(expr)        
     except:
-        return "Something went wrong"
-             
+        return "Something went wrong"             
+def decor(func):
+    def main():
+        c = datetime.now()
+        f = func('sin(x) - 1')
+        time.sleep(1)
+        v = datetime.now()
+        return v - c
+    return main()
+print(decor(replace))        
+        
+        
+            
+    
