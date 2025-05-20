@@ -4,7 +4,7 @@ from urllib.parse import parse_qs, urlparse
 
 
 
-
+#st.title("Buy a preimium subcription and user some more functions")
 #Public_key = 'public_key'
 stripe.api_key = 'i hate sasha mishin'
 def create_session(amount,currency='usd'):
