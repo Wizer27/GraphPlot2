@@ -2,6 +2,10 @@ import streamlit as st
 import stripe
 from urllib.parse import parse_qs, urlparse
 
+
+
+
+Public_key = 'public_key'
 stripe.api_key = 'i hate sasha mishin'
 def create_session(amount,currency='usd'):
     try:
