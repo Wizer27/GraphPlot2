@@ -33,7 +33,11 @@
       "sin(x)",
       "",
       "sin(x)",
-      "x - 10"
+      "x - 10",
+      "",
+      "",
+      "",
+      ""
     ]
   },
   {
@@ -55,6 +59,19 @@
       "x - 10",
       "sin(x)",
       "",
+      "log(x)"
+    ]
+  },
+  {
+    "username": "Tima_Surkov",
+    "formulas": [
+      "",
+      "cos(x)",
+      "cos(x)",
+      "",
+      "cos(x)",
+      "log(sx)",
+      "cos(x)",
       "log(x)"
     ]
   }
