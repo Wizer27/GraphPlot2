@@ -101,18 +101,10 @@
       "",
       "sin(x)",
       "cos(x)",
+      "log(x) - 1",
       "",
-      "xyi",
-      "sin(x)",
-      "",
-      "xyu",
-      "sin(x)",
-      "sin(x)",
-      "",
-      "sin(x)",
-      "huiu",
-      "sin(x)",
-      "cos(x)"
+      "x - 90",
+      ""
     ]
   },
   {
@@ -147,7 +139,15 @@
       "cos(x)",
       "log(sx)",
       "cos(x)",
-      "log(x)"
+      "log(x)",
+      "",
+      ""
+    ]
+  },
+  {
+    "username": "hash_man",
+    "formulas": [
+      ""
     ]
   }
 ]
