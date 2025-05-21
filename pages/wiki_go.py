@@ -2,6 +2,7 @@ import wikipedia as wk
 import streamlit as st
 #print(wk.summary("Java programming language"))
 from authorize import autor
+from authorize import hash_password
 import json
 # ====LOGIN PAGE ====
 def register_user(username, password):
@@ -36,7 +37,7 @@ if not st.session_state.logged_in:
                 with open('/Users/ivanvinogradov/GraphPlot2/users.json','r', encoding="utf-8") as file:
                     data = json.load(file)
                     
-                data[new_username] = hash(new_password) # записываем нового пользователя 
+                data[new_username] = hash_password(new_password) # записываем нового пользователя 
                 
                 
                 

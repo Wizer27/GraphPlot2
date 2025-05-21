@@ -3,7 +3,7 @@ import json
 import streamlit as st
 import json
 from authorize import autor
-
+from authorize import hash_password
 
 
 # ===== LOGIN PAGE ===== 
@@ -45,7 +45,7 @@ if not st.session_state.logged_in:
                 with open('/Users/ivanvinogradov/GraphPlot2/users.json','r', encoding="utf-8") as file:
                     data = json.load(file)
                     
-                data[new_username] = hash(new_password) # записываем нового пользователя 
+                data[new_username] = hash_password(new_password) # записываем нового пользователя 
                 
                 
                 
