@@ -333,7 +333,9 @@ def decor(func):
         return v - c
     return main()
 print(decor(replace))        
-        
-       
+
+
+def tests():
+    pass           
             
     
