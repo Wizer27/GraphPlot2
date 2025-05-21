@@ -160,9 +160,10 @@ with st.sidebar:
         forl = st.text_input(f'Enter the formula{i}',key = f"Formula{i}")
         formulas.append(forl)
         try:
-            ys.append(safe_evaluate(replace(forl),{'x':x}))
+            if forl != '':
+                ys.append(safe_evaluate(replace(forl),{'x':x}))
         except:
-            print('Something went wrong')    
+            st.error('Something went wrong')    
     with open('dt2.json','r') as file:
         try:
             data = json.load(file)
