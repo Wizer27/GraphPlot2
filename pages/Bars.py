@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import json
 from authorize import autor
+from authorize import hash_password
+
+
 
 def register_user(username, password):
     if 'users' not in st.session_state:
@@ -32,10 +35,12 @@ if not st.session_state.logged_in:
                 register_user(new_username, new_password)
                 st.success("Регистрация успешна! Можете войти")
                 st.session_state.show_register = False
+                
+                
                 with open('/Users/ivanvinogradov/GraphPlot2/users.json','r', encoding="utf-8") as file:
                     data = json.load(file)
                     
-                data[new_username] = new_password # записываем нового пользователя 
+                data[new_username] = hash_password(new_password) # записываем нового пользователя 
                 
                 
                 

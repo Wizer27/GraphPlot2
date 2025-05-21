@@ -1,13 +1,18 @@
 import json
-from werkzeug.security import check_password_hash
+import hashlib
 
+
+def hash_password(password:str) -> str:
+    password_bytes = password.encode("utf-8")
+    hashed = hashlib.sha256(password_bytes).hexdigest()
+    return hashed 
 def load():
     with open('/Users/ivanvinogradov/GraphPlot2/users.json','r') as file:
         return json.load(file)
 def autor(username,password):
     users = load()
     print(users)
-    if username in users and  users[username] == hash(password):
+    if username in users and  users[username] == hash_password(password):
         return True
     return False   
 def evens(iterable: iter) -> list:
