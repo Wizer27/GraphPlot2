@@ -52,6 +52,7 @@ if not st.session_state.logged_in:
         if st.button("Зарегистрироваться"):
             with open('/Users/ivanvinogradov/GraphPlot2/users.json','r') as file:
                 d = json.load(file)
+            # проверяю еслть ли такой пользователб или нет    
             if new_username in d:
                 st.error('This username is already taken')
             else:   
@@ -88,6 +89,7 @@ if not st.session_state.logged_in:
         password = st.text_input("Пароль", type="password")
         us2 = username
         if st.button("Войти"):
+            # Проверяю на подписку
             if autor(username, password):
                 st.session_state.logged_in = True
                 st.session_state.username = username
