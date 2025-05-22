@@ -50,29 +50,32 @@ if not st.session_state.logged_in:
         confirm_password = st.text_input("Повторите пароль", type="password", key="reg_pass2")
         
         if st.button("Зарегистрироваться"):
-            if not new_username or not new_password:
-                st.error("Заполните все поля")
-            elif new_password != confirm_password:
-                st.error("Пароли не совпадают!")
-            elif new_username in st.session_state.get('users', {}):
-                st.error("Пользователь уже существует")
-            else:
-                register_user(new_username, new_password)
-                st.success("Регистрация успешна! Можете войти")
-                st.session_state.show_register = False
-                with open('/Users/ivanvinogradov/GraphPlot2/users.json','r', encoding="utf-8") as file:
-                    data = json.load(file)
-                    
-                data[new_username] = hash_password(new_password) # записываем нового пользователя 
-                
-                
-                
-                # Запись в базу нового пользователя (уже обновляем базу)
-                with open('/Users/ivanvinogradov/GraphPlot2/users.json','w', encoding="utf-8") as file:
-                    json.dump(data,file,indent=4, ensure_ascii=False)
-                       
+            with open('/Users/ivanvinogradov/GraphPlot2/users.json','r') as file:
+                d = json.load(file)
+            if new_username in d:
+                st.error('This username is already taken')
+            else:   
+                if not new_username or not new_password:
+                    st.error("Заполните все поля")
+                elif new_password != confirm_password:
+                    st.error("Пароли не совпадают!")
+                else:
+                    register_user(new_username, new_password)
+                    st.success("Регистрация успешна! Можете войти")
+                    st.session_state.show_register = False
+                    with open('/Users/ivanvinogradov/GraphPlot2/users.json','r', encoding="utf-8") as file:
+                        data = json.load(file)
+                        
+                    data[new_username] = hash_password(new_password) # записываем нового пользователя 
                     
                     
+                    
+                    # Запись в базу нового пользователя (уже обновляем базу)
+                    with open('/Users/ivanvinogradov/GraphPlot2/users.json','w', encoding="utf-8") as file:
+                        json.dump(data,file,indent=4, ensure_ascii=False)
+                        
+                        
+                        
                     
         if st.button("← Назад к входу"):
             st.session_state.show_register = False
@@ -90,12 +93,10 @@ if not st.session_state.logged_in:
                 st.session_state.username = username
                 with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
                     n = json.load(file)
-                print('Вот БАЗА')
-                print(n)
-                print(n[username])    
-                if n[username] == "Premium":
-                    st.session_state.premium = True
-                st.rerun()
+                if username in n:
+                    if n[username] == "Premium":
+                        st.session_state.premium = True
+                    st.rerun()
             else:
                 st.error("Неверные данные")
         if st.button("Создать новый аккаунт"):
