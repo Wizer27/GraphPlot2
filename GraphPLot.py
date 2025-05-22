@@ -33,7 +33,9 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'show_register' not in st.session_state:
     st.session_state.show_register = False  
-    
+# ссессия для премиума (она должна быть локальной через любую страницу мы можем ее достать)    
+if 'premium' not in st.session_state:
+    st.session_state.premium = False    
     
     
 us2 = ''    
