@@ -14,7 +14,11 @@ def register_user(username, password):
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'show_register' not in st.session_state:
-    st.session_state.show_register = False 
+    st.session_state.show_register = False      
+# ссессия для премиума (она должна быть локальной через любую страницу мы можем ее достать)    
+if 'premium' not in st.session_state:
+    st.session_state.premium = False  
+us2 = ''    
 if not st.session_state.logged_in:
     # Переключатель между формами входа и регистрации
     if st.session_state.show_register:
@@ -57,7 +61,7 @@ if not st.session_state.logged_in:
         st.title("🔒 Вход в систему")
         username = st.text_input("Логин")
         password = st.text_input("Пароль", type="password")
-        
+        us2 = username
         if st.button("Войти"):
             if autor(username, password):
                 st.session_state.logged_in = True
@@ -73,8 +77,7 @@ if not st.session_state.logged_in:
     st.stop()
 
 # Основной интерфейс после авторизации
-st.success(f"✅ Добро пожаловать, {st.session_state.username}!")    
-            
+st.success(f"✅ Welcome, {st.session_state.username}!")           
 st.markdown("""Wikipedia Search App
 This is a simple Streamlit application that allows users to search for any topic using the Wikipedia API.
 The app displays a summary of the requested topic or shows an error message if the topic is not found.""")

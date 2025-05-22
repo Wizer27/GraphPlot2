@@ -11,11 +11,15 @@ def register_user(username, password):
         st.session_state.users = {}
     st.session_state.users[username] = password
     
+    
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'show_register' not in st.session_state:
-    st.session_state.show_register = False     
-# ===== LOGIN PAGE ===== ;
+    st.session_state.show_register = False      
+# ссессия для премиума (она должна быть локальной через любую страницу мы можем ее достать)    
+if 'premium' not in st.session_state:
+    st.session_state.premium = False  
+us2 = ''    
 if not st.session_state.logged_in:
     # Переключатель между формами входа и регистрации
     if st.session_state.show_register:
@@ -35,8 +39,6 @@ if not st.session_state.logged_in:
                 register_user(new_username, new_password)
                 st.success("Регистрация успешна! Можете войти")
                 st.session_state.show_register = False
-                
-                
                 with open('/Users/ivanvinogradov/GraphPlot2/users.json','r', encoding="utf-8") as file:
                     data = json.load(file)
                     
@@ -60,7 +62,7 @@ if not st.session_state.logged_in:
         st.title("🔒 Вход в систему")
         username = st.text_input("Логин")
         password = st.text_input("Пароль", type="password")
-        
+        us2 = username
         if st.button("Войти"):
             if autor(username, password):
                 st.session_state.logged_in = True
@@ -76,8 +78,7 @@ if not st.session_state.logged_in:
     st.stop()
 
 # Основной интерфейс после авторизации
-st.success(f"✅ Добро пожаловать, {st.session_state.username}!")    
-    
+st.success(f"✅ Welcome, {st.session_state.username}!")           
 with st.sidebar:
     count  = st.number_input("How many bars?",min_value = 1,max_value = 20,step = 1)
     lab = []

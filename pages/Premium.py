@@ -80,7 +80,7 @@ if not st.session_state.logged_in:
     st.stop()
 
 # Основной интерфейс после авторизации
-st.success(f"✅ Добро пожаловать, {st.session_state.username}!")           
+st.success(f"✅ Welcome, {st.session_state.username}!")           
 def buy_premium():
     st.session_state.premium = True
     with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
