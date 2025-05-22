@@ -94,6 +94,7 @@ def buy_premium():
     with open('/Users/ivanvinogradov/GraphPlot2/premium.json','w') as file:
         json.dump(data,file,indent = 2)                 
     print(data)
+    st.success('Thanks for buying premium')
       
 #st.title("Buy a preimium subcription and user some more functions")
 #Public_key = 'public_key'
