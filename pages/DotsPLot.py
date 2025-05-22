@@ -17,7 +17,14 @@ if 'logged_in' not in st.session_state:
 if 'show_register' not in st.session_state:
     st.session_state.show_register = False
     
-        
+# ссессия для премиума (она должна быть локальной через любую страницу мы можем ее достать)    
+if 'premium' not in st.session_state:
+    st.session_state.premium = False  
+    
+    
+   
+    
+            
 if not st.session_state.logged_in:
     # Переключатель между формами входа и регистрации
     if st.session_state.show_register:
@@ -77,8 +84,13 @@ if not st.session_state.logged_in:
 
 # Основной интерфейс после авторизации
 st.success(f"✅ Добро пожаловать, {st.session_state.username}!")    
-    
 
+
+
+if not st.session_state.premium: 
+        st.title('DotsPlot')
+        st.error('This is a Premium function')
+        st.stop()
 fig = plt.figure()
 #x = [1, 2, 3, 4]
 #y = [10, 20, 25, 30]

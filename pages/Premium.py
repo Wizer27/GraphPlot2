@@ -3,7 +3,13 @@ import stripe
 from urllib.parse import parse_qs, urlparse
 
 
-
+# ссессия для премиума (она должна быть локальной через любую страницу мы можем ее достать)    
+if 'premium' not in st.session_state:
+    st.session_state.premium = False  
+    
+def buy_premium():
+    st.session_state.premium = True
+        
 #st.title("Buy a preimium subcription and user some more functions")
 #Public_key = 'public_key'
 stripe.api_key = 'i hate sasha mishin'
@@ -24,6 +30,7 @@ st.title('Buy premium subcription')
 def test():
     s = {}
     return hash(s)
-st.button('Confirm',on_click=test)
+
+st.button('Confirm',on_click=buy_premium)
 
 ### Make a pay page 
