@@ -91,8 +91,10 @@ if not st.session_state.logged_in:
                 with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
                     n = json.load(file)
                 print('Вот БАЗА')
-                print(n)    
-    
+                print(n)
+                print(n[username])    
+                if n[username] == "Premium":
+                    st.session_state.premium = True
                 st.rerun()
             else:
                 st.error("Неверные данные")
