@@ -10,3 +10,4 @@ plotly==5.18.0
 matplotlib==3.7.1  # Совместимая версия
 python-dateutil==2.8.2
 pytz==2023.3.post1
+setuptools==68.2.2 
