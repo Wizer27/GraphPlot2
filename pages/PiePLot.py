@@ -81,7 +81,11 @@ if not st.session_state.logged_in:
     st.stop()
 
 # Основной интерфейс после авторизации
-st.success(f"✅ Welcome, {st.session_state.username}!")                  
+st.success(f"✅ Welcome, {st.session_state.username}!")   
+if not st.session_state.premium:
+    st.title('PiePlot')
+    st.error('This is a Premium function')
+    st.stop()               
 with st.sidebar:
     plt.style.use('_mpl-gallery-nogrid')
 
