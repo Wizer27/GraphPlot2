@@ -7,7 +7,7 @@ def hash_password(password:str) -> str:
     hashed = hashlib.sha256(password_bytes).hexdigest()
     return hashed 
 def load():
-    with open('/Users/ivanvinogradov/GraphPlot2/users.json','r') as file:
+    with open('users.json','r') as file:
         return json.load(file)
 def autor(username,password):
     users = load()

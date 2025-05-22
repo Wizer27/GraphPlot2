@@ -50,8 +50,10 @@ if not st.session_state.logged_in:
         confirm_password = st.text_input("Повторите пароль", type="password", key="reg_pass2")
         
         if st.button("Зарегистрироваться"):
-            with open('/Users/ivanvinogradov/GraphPlot2/users.json','r') as file:
+            with open('users.json','r') as file:
+                print('Test base working')
                 d = json.load(file)
+                
             # проверяю еслть ли такой пользователб или нет    
             if new_username in d:
                 st.error('This username is already taken')
@@ -64,7 +66,7 @@ if not st.session_state.logged_in:
                     register_user(new_username, new_password)
                     st.success("Регистрация успешна! Можете войти")
                     st.session_state.show_register = False
-                    with open('/Users/ivanvinogradov/GraphPlot2/users.json','r', encoding="utf-8") as file:
+                    with open('users.json','r', encoding="utf-8") as file:
                         data = json.load(file)
                         
                     data[new_username] = hash_password(new_password) # записываем нового пользователя 
@@ -72,7 +74,7 @@ if not st.session_state.logged_in:
                     
                     
                     # Запись в базу нового пользователя (уже обновляем базу)
-                    with open('/Users/ivanvinogradov/GraphPlot2/users.json','w', encoding="utf-8") as file:
+                    with open('users.json','w', encoding="utf-8") as file:
                         json.dump(data,file,indent=4, ensure_ascii=False)
                         
                         
@@ -93,7 +95,7 @@ if not st.session_state.logged_in:
             if autor(username, password):
                 st.session_state.logged_in = True
                 st.session_state.username = username
-                with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
+                with open('premium.json','r') as file:
                     n = json.load(file)
                 if username in n:
                     if n[username] == "Premium":
