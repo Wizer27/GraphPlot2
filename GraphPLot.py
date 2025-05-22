@@ -116,7 +116,6 @@ def safe_evaluate(expr, variables=None):
     }
     local_dict = {**(variables or {}), **allowed_functions}
     return ne.evaluate(expr, local_dict=local_dict, global_dict={})
-
 def replace_abs_notation(expression):
     """Заменяет |x| на abs(x) в выражении (оригинальная функция без изменений)"""
     stack = []

@@ -95,7 +95,14 @@ def buy_premium():
         json.dump(data,file,indent = 2)                 
     print(data)
     st.success('Thanks for buying premium')
-      
+def unsubscribe():
+    st.session_state.premium = False
+    st.success('You unsubscribed')    
+if st.session_state.premium:  
+    uns = st.button('Unsubscribe',on_click=unsubscribe)
+     
+
+             
 #st.title("Buy a preimium subcription and user some more functions")
 #Public_key = 'public_key'
 stripe.api_key = 'i hate sasha mishin'
