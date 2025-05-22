@@ -32,12 +32,17 @@ def register_user(username, password):
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'show_register' not in st.session_state:
-    st.session_state.show_register = False    
+    st.session_state.show_register = False 
     
+       
+if 'premium' not in st.session_state:
+    st.session_state.premium = False  
+        
     
 us2 = ''    
 if not st.session_state.logged_in:
-    # Переключатель между формами входа и регистрации
+    # Переключатель между формами входа и регистрации    
+        
     if st.session_state.show_register:
         st.title("📝 Регистрация")
         new_username = st.text_input("Новый логин", key="reg_user")
@@ -83,16 +88,19 @@ if not st.session_state.logged_in:
             if autor(username, password):
                 st.session_state.logged_in = True
                 st.session_state.username = username
+                with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
+                    n = json.load(file)
+                print('Вот БАЗА')
+                print(n)    
+    
                 st.rerun()
             else:
                 st.error("Неверные данные")
-        
         if st.button("Создать новый аккаунт"):
             st.session_state.show_register = True
             st.rerun()
     
     st.stop()
-
 # Основной интерфейс после авторизации
 st.success(f"✅ Добро пожаловать, {st.session_state.username}!")       
 def safe_evaluate(expr, variables=None):

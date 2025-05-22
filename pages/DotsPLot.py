@@ -91,6 +91,7 @@ if not st.session_state.premium:
         st.title('DotsPlot')
         st.error('This is a Premium function')
         st.stop()
+        
 fig = plt.figure()
 #x = [1, 2, 3, 4]
 #y = [10, 20, 25, 30]
