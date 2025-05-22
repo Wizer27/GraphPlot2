@@ -1,13 +1,14 @@
-# Основные зависимости (проверенные версии)
-streamlit==1.32.2  # Более стабильная версия
-numpy==1.23.5  # Совместим с pandas 2.0.3
-numexpr==2.8.4  # Рабочая версия для этой связки
+# Core dependencies
+streamlit==1.32.2
+pandas==2.0.3
+numpy==1.23.5
+numexpr==2.8.4; python_version < '3.12'  # Явное условие для Python < 3.12
 
-# Дополнительные зависимости
-stripe==5.5.0  # Стабильная версия
+# Alternative for Python 3.12+
+numexpr==2.9.0; python_version >= '3.12'
+
+# Other packages
+stripe==5.5.0
 wikipedia==1.4.0
 plotly==5.18.0
-matplotlib==3.7.1  # Совместимая версия
-python-dateutil==2.8.2
-pytz==2023.3.post1
-setuptools==68.2.2 
+setuptools==68.2.2
