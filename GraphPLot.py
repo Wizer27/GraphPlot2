@@ -170,7 +170,7 @@ with st.sidebar:
     # ========= БАЗА ДАННЫХ ГРАФИКОВ ========= 
     formulas = []
     for i in range(count):
-        forl = st.text_input(f'Enter the formula{i}',key = f"Formula{i}")
+        forl = st.text_input(f'Enter the formula {i + 1}',key = f"Formula{i}")
         formulas.append(forl)
         try:
             if forl != '':
