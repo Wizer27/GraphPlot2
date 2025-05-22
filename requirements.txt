@@ -3,7 +3,9 @@ streamlit==1.32.0
 numpy==1.26.2
 plotly==5.18.0
 matplotlib==3.8.2
-
+numexpr==2.8.7 
+stripe==7.0.0 
+wikipedia==1.4.0
 # Для работы с JSON
 python-json-logger==2.0.7
 
