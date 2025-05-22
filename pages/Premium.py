@@ -97,7 +97,15 @@ def buy_premium():
     st.success('Thanks for buying premium')
 def unsubscribe():
     st.session_state.premium = False
-    st.success('You unsubscribed')    
+    st.success('You unsubscribed')  
+    with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
+        users = json.load(file)
+    users[st.session_state.username] = 'Standart'
+    
+    
+    with open('/Users/ivanvinogradov/GraphPlot2/premium.json','w') as file:
+        json.dump(users,file,indent=2)    
+          
 if st.session_state.premium:  
     uns = st.button('Unsubscribe',on_click=unsubscribe)
      
