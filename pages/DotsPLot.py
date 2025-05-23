@@ -110,12 +110,19 @@ with st.sidebar:
     grid = st.checkbox('Grid')
     count = st.number_input('How many dots?',min_value=1,max_value = 50)
     for dot in range(count + 1):
-        x = st.text_input(f'Dotx {dot}',key = f"Dotx {dot}")
-        y = st.text_input(f'Doty {dot}',key = f"Doty {dot}")
-        if x != '':  
-            xs.append(int(x))
-        if y != '':        
-            ys.append(int(y))
+        x = st.text_input(f'Dot {dot+ 1}',key = f"Dotx {dot}",placeholder= '1,2')
+        if x  != '':
+            try:
+                x = x.split(',')
+                xs.append(x[0])
+                ys.append(x[1])
+            except:
+                st.error('Something went wrong.Try again.')    
+        #y = st.text_input(f'Doty {dot}',key = f"Doty {dot}")
+        #if x != '':  
+         #   xs.append(int(x))
+        #if y != '':        
+            #ys.append(int(y))
 print("xs:", xs)
 print("ys: ", ys)    
 if grid:
@@ -127,4 +134,4 @@ else:
 st.pyplot(fig)
 
 
-
+    
