@@ -227,7 +227,7 @@ except Exception as e:
     st.error(f"No function for {e}")
     y4 = np.zeros_like(x4)     
 x4, y4 = np.meshgrid(x4, y4)
-z = y4
+z = np.sin(np.sqrt(x4**2 + y4**2))
 fiig = plt.figure()
 ax = fiig.add_subplot(projection='3d')
 ax.plot_surface(x4, y4, z, cmap='viridis')

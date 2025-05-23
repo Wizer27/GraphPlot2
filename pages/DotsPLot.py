@@ -94,7 +94,7 @@ if not st.session_state.logged_in:
     
     st.stop()
 # Основной интерфейс после авторизации
-st.success(f"✅ Welcome, {st.session_state.username}!")       
+st.success(f"✅ Welcome, {st.session_state.username}!")      
 if not st.session_state.premium: 
         st.title('DotsPlot')
         st.error('This is a Premium function')
@@ -132,6 +132,5 @@ if len(ys) == len(xs):
 else:
     st.error("Not enough inputs !")    
 st.pyplot(fig)
-
 
     
