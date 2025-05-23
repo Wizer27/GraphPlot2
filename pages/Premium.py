@@ -112,6 +112,7 @@ def buy_premium():
         json.dump(data,file,indent = 2)                 
     print(data)
     st.success('Thanks for buying premium')
+    
 def unsubscribe():
     st.session_state.premium = False
     st.success('You unsubscribed')  
