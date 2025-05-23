@@ -96,7 +96,8 @@ if not st.session_state.logged_in:
     
     st.stop()
 # Основной интерфейс после авторизации
-st.success(f"✅ Добро пожаловать, {st.session_state.username}!")       
+st.success(f"✅ Добро пожаловать, {st.session_state.username}!")   
+st.title('Buy premium subcription')    
 def buy_premium():
     st.session_state.premium = True
     with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
@@ -121,6 +122,9 @@ def unsubscribe():
     
     with open('/Users/ivanvinogradov/GraphPlot2/premium.json','w') as file:
         json.dump(users,file,indent=2)    
+st.button('Confirm',on_click=buy_premium)
+
+
           
 if st.session_state.premium:  
     uns = st.button('Unsubscribe',on_click=unsubscribe)
@@ -143,11 +147,9 @@ def create_session(amount,currency='usd'):
         st.error(f"Error {e}")
 
 
-st.title('Buy premium subcription')
 def test():
     s = {}
     return hash(s)
 
-st.button('Confirm',on_click=buy_premium)
 
 ### Make a pay page 
