@@ -121,8 +121,9 @@ def unsubscribe():
     
     
     with open('/Users/ivanvinogradov/GraphPlot2/premium.json','w') as file:
-        json.dump(users,file,indent=2)    
-st.button('Confirm',on_click=buy_premium)
+        json.dump(users,file,indent=2) 
+if not st.session_state.premium:
+    st.button('Confirm',on_click=buy_premium)
 
 
           
