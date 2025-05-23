@@ -114,15 +114,15 @@ with st.sidebar:
         if x  != '':
             try:
                 x = x.split(',')
-                xs.append(x[0])
-                ys.append(x[1])
+                xs.append(int(x[0]))
+                ys.append(int(x[1]))
             except:
                 st.error('Something went wrong.Try again.')    
         #y = st.text_input(f'Doty {dot}',key = f"Doty {dot}")
         #if x != '':  
          #   xs.append(int(x))
         #if y != '':        
-            #ys.append(int(y))
+         #   ys.append(int(y))
 print("xs:", xs)
 print("ys: ", ys)    
 if grid:
