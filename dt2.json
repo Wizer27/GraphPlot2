@@ -259,7 +259,13 @@
       "x - 10",
       "sin(x)",
       "x - 10",
-      ""
+      "",
+      "",
+      "sin(x)",
+      "sin(x)",
+      "",
+      "sin(x)",
+      "cos(x)"
     ]
   },
   {
@@ -271,6 +277,12 @@
   },
   {
     "username": "test_prem",
+    "formulas": [
+      ""
+    ]
+  },
+  {
+    "username": "Shurikvsempoka",
     "formulas": [
       ""
     ]
