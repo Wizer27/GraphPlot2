@@ -15,7 +15,10 @@ def register_user(username, password):
     
     
     
+if 'admin' not in st.session_state:
+    st.session_state.admin = False
     
+        
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'show_register' not in st.session_state:
@@ -153,5 +156,9 @@ def test():
     s = {}
     return hash(s)
 
-
+if st.session_state.username == 'Ivan':
+    with open('users.json','r') as file:
+        al = json.load(file)
+    st.write('All users')    
+    st.write(al)    
 ### Make a pay page 
