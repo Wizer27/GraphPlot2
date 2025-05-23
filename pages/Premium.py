@@ -100,13 +100,24 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!")   
-st.title('Buy premium subscription')    
+st.title('Buy premium subscription') 
+
+
+
+
+def unsub_bec_time(c):
+    if str(datetime.now()).split()[0] == c:
+        st.session_state.premium = False
+        st.error('You sub is not working')
+        
 def buy_premium():
     st.session_state.premium = True
     datetim = datetime.now()
     dt = str(datetim).split()
     dateoftime = dt[0].split('-')
     final = dateoftime[0]+'-'+'0'+str(int(dateoftime[1])+1)+'-'+dateoftime[2]
+    print("DEBUG:FINAL",final)
+    print("DEBUG DATE:",str(datetime.now()).split()[0])
     #print(int(dateoftime[1]) + 1)
     with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
         data = json.load(file)
@@ -120,7 +131,7 @@ def buy_premium():
         json.dump(data,file,indent = 2)                 
     print(data)
     st.success('Thanks for buying premium')
-    st.success(f"Your subscription if valid until {final}")
+    st.success(f"Your subscription is valid until {final}")
 def unsubscribe():
     st.session_state.premium = False
     st.success('You unsubscribed')  
@@ -167,3 +178,7 @@ if st.session_state.username == 'Ivan':
     st.write('All users')    
     st.write(al)    
 ### Make a pay page 
+
+
+### DEBUGING AND TESTING FUNCTIONS
+
