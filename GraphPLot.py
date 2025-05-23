@@ -235,23 +235,6 @@ st.pyplot(fiig)
 
 
 
-######Нейросеть######
-# Вычисления (с заменой ne.evaluate на safe_evaluate)
-#try:
- #   y = safe_evaluate(replace_abs_notation(function.lower()), {'x': x})
-#except Exception as e:
-  #  st.error(f"Ошибка в формуле: {e}")
-   # y = np.zeros_like(x) 
-
-#if fun2 != '':
-    #fun2 = fun2 + ' '
-    #try:
-     #   y2 = safe_evaluate(replace_abs_notation(fun2.lower()), {'x': x})
-    #except Exception as e:
-     #   st.error(f"Ошибка в формуле: {e}")
-      #  y2 = np.zeros_like(x)        
-
-# Построение графика (без изменений)
  
 
 
