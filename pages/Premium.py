@@ -108,7 +108,22 @@ st.title('Buy premium subscription')
 def unsub_bec_time(c):
     if str(datetime.now()).split()[0] == c:
         st.session_state.premium = False
-        st.error('You sub is not working')
+        
+        
+        
+        with open('premium.json','r') as file:
+            pr = json.load(file)
+        
+        
+        
+        
+        pr[st.session_state.username] = "Standart"
+        
+        
+        with open('premium.json',"w") as file:
+            print('DEBUG BASE')
+            json.dump(pr,file,indent=2)    
+        st.error(f'Your sub is not valid.Today is f{c}')
         
 def buy_premium():
     st.session_state.premium = True
@@ -182,3 +197,7 @@ if st.session_state.username == 'Ivan':
 
 ### DEBUGING AND TESTING FUNCTIONS
 
+c = str(datetime.now()).split()[0]
+
+
+print(unsub_bec_time(c))
