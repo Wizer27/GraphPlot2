@@ -105,25 +105,24 @@ st.title('Buy premium subscription')
 
 
 
-def unsub_bec_time(c):
-    if str(datetime.now()).split()[0] == c:
-        st.session_state.premium = False
-        
-        
-        
-        with open('premium.json','r') as file:
-            pr = json.load(file)
-        
-        
-        
-        
-        pr[st.session_state.username] = "Standart"
-        
-        
-        with open('premium.json',"w") as file:
-            print('DEBUG BASE')
-            json.dump(pr,file,indent=2)    
-        st.error(f'Your sub is not valid.Today is f{c}')
+def unsub_bec_time():
+    st.session_state.premium = False
+    
+    
+    
+    with open('premium.json','r') as file:
+        pr = json.load(file)
+    
+    
+    
+    
+    pr[st.session_state.username] = "Standart"
+    
+    
+    with open('premium.json',"w") as file:
+        print('DEBUG BASE')
+        json.dump(pr,file,indent=2)    
+    st.error(f'Your sub is not valid')
         
 def buy_premium():
     st.session_state.premium = True
@@ -134,7 +133,7 @@ def buy_premium():
     print("DEBUG:FINAL",final)
     print("DEBUG DATE:",str(datetime.now()).split()[0])
     #print(int(dateoftime[1]) + 1)
-    with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
+    with open('premium.json','r') as file:
         data = json.load(file)
     
     
@@ -142,20 +141,23 @@ def buy_premium():
           data[st.session_state.username] = 'Premium'
     else:
         data[st.session_state.username] = 'Standart'
-    with open('/Users/ivanvinogradov/GraphPlot2/premium.json','w') as file:
+    with open('premium.json','w') as file:
         json.dump(data,file,indent = 2)                 
     print(data)
     st.success('Thanks for buying premium')
     st.success(f"Your subscription is valid until {final}")
+    if final == str(datetime.now()).split()[0]:
+        print('Sub should be gone')
+        unsub_bec_time()
 def unsubscribe():
     st.session_state.premium = False
     st.success('You unsubscribed')  
-    with open('/Users/ivanvinogradov/GraphPlot2/premium.json','r') as file:
+    with open('premium.json','r') as file:
         users = json.load(file)
     users[st.session_state.username] = 'Standart'
     
     
-    with open('/Users/ivanvinogradov/GraphPlot2/premium.json','w') as file:
+    with open('premium.json','w') as file:
         json.dump(users,file,indent=2) 
 if not st.session_state.premium:
     st.button('Confirm',on_click=buy_premium)
@@ -196,8 +198,3 @@ if st.session_state.username == 'Ivan':
 
 
 ### DEBUGING AND TESTING FUNCTIONS
-
-c = str(datetime.now()).split()[0]
-
-
-print(unsub_bec_time(c))
