@@ -144,8 +144,8 @@ def buy_premium():
     with open('premium.json','w') as file:
         json.dump(data,file,indent = 2)                 
     print(data)
-    st.success('Thanks for buying premium')
-    st.success(f"Your subscription is valid until {final}")
+    st.success('Your 1 mouth free trial started !')
+    st.success(f"Your free trial is valid until {final}")
     if final == str(datetime.now()).split()[0]:
         print('Sub should be gone')
         unsub_bec_time()

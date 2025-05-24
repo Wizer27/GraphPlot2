@@ -169,6 +169,7 @@ with st.sidebar:
     ys = [] #список всех формул
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     logs = []
+    coins = 0
     # ========= БАЗА ДАННЫХ ГРАФИКОВ ========= 
     formulas = []
     for i in range(count):
@@ -177,6 +178,7 @@ with st.sidebar:
         try:
             if forl != '':
                 ys.append(safe_evaluate(replace(forl),{'x':x}))
+                coins += 1
         except:
             st.error('Something went wrong')    
     with open('dt2.json','r') as file:
@@ -220,6 +222,10 @@ with st.sidebar:
         description.text("")   
           
 # ======== 3D ГРАФИК ========
+
+
+st.write(f"Your amount of coins is 🪙💰 {coins}")
+st.session_state.money = coins
 x4 = np.linspace(x_min,x_max,steps)
 try:
     y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
