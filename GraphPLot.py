@@ -38,7 +38,10 @@ if 'show_register' not in st.session_state:
 if 'premium' not in st.session_state:
     st.session_state.premium = False  
         
+if 'processed' not in st.session_state:
+    st.session_state.processed = set()
     
+        
 us2 = ''    
 if not st.session_state.logged_in:
     # Переключатель между формами входа и регистрации    
@@ -177,10 +180,17 @@ with st.sidebar:
         forl = st.text_input(f'Enter the formula {i + 1}',key = f"Formula{i}")
         formulas.append(forl)
         try:
-            if forl != '':
+            if forl != '' and f"Formula{i}" not in st.session_state.processed:
+                st.session_state.processed.add(f"Formula{i}")
                 ys.append(safe_evaluate(replace(forl),{'x':x}))
                 coins += 1 
-                cnis.append(coins)
+                #cnis.append(coins)
+                with open('coins.json', 'r+') as file:
+                    cn = json.load(file)
+                    cn[st.session_state.username] += 1
+                    file.seek(0)
+                    json.dump(cn, file, indent=2)
+                    file.truncate() 
         except:
             st.error('Something went wrong')    
     with open('dt2.json','r') as file:
@@ -225,23 +235,13 @@ with st.sidebar:
           
 # ======== 3D ГРАФИК ========
 
-#with open('coins.json','r') as file:
-   # all_coins = json.load(file)
-
-#current = all_coins.get(st.session_state.username, 0)
 
 
-  
-#all_coins[st.session_state.username] = int(current + coins) 
-
+with open('coins.json','r') as f:
+    fil = json.load(f)
     
-print(coins)
-print(cnis)
-st.write(f"Your amount of coins is 🪙💰 {coins}")
-st.session_state.money = coins
-#with open('coins.json','w') as file:
-    #json.dump(all_coins,file,indent=2)
-    
+
+st.write(f"Your amount of coins is 🪙💰 {fil[st.session_state.username]}")    
         
 x4 = np.linspace(x_min,x_max,steps)
 try:
