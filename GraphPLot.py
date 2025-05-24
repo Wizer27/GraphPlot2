@@ -40,7 +40,6 @@ if 'premium' not in st.session_state:
         
 if 'processed' not in st.session_state:
     st.session_state.processed = set()
-    
         
 us2 = ''    
 if not st.session_state.logged_in:
@@ -112,7 +111,15 @@ if not st.session_state.logged_in:
     
     st.stop()
 # Основной интерфейс после авторизации
-st.success(f"✅ Welcome, {st.session_state.username}!")       
+st.success(f"✅ Welcome, {st.session_state.username}!")  
+with open('coins.json','r') as t:
+    ust = json.load(t)
+        
+if st.session_state.username not in ust:
+    ust[st.session_state.username] = 0
+    with open('coins.json','w') as g:
+        json.dump(ust,g,indent=2)
+            
 def safe_evaluate(expr, variables=None):
     """Безопасная замена ne.evaluate() с ограниченным набором функций"""
     allowed_functions = {
@@ -180,9 +187,9 @@ with st.sidebar:
         forl = st.text_input(f'Enter the formula {i + 1}',key = f"Formula{i}")
         formulas.append(forl)
         try:
-            if forl != '' and f"Formula{i}" not in st.session_state.processed:
+            if f"Formula{i}" not in st.session_state.processed:
                 st.session_state.processed.add(f"Formula{i}")
-                ys.append(safe_evaluate(replace(forl),{'x':x}))
+                #ys.append(safe_evaluate(replace(forl),{'x':x}))
                 coins += 1 
                 #cnis.append(coins)
                 with open('coins.json', 'r+') as file:
@@ -192,7 +199,12 @@ with st.sidebar:
                     json.dump(cn, file, indent=2)
                     file.truncate() 
         except:
-            st.error('Something went wrong')    
+            st.error('Something went wrong')  
+        if forl != '':
+            try:
+                ys.append(safe_evaluate(replace(forl),{'x':x}))
+            except:
+                st.error('Plot is not working')          
     with open('dt2.json','r') as file:
         try:
             data = json.load(file)
@@ -240,9 +252,11 @@ with st.sidebar:
 with open('coins.json','r') as f:
     fil = json.load(f)
     
+if st.session_state.username in fil:
+    
+    st.write(f"Your amount of coins is 🪙💰 {fil[st.session_state.username]}")    
 
-st.write(f"Your amount of coins is 🪙💰 {fil[st.session_state.username]}")    
-        
+            
 x4 = np.linspace(x_min,x_max,steps)
 try:
     y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
