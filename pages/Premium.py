@@ -104,7 +104,10 @@ st.title('Buy premium subscription')
 
 
 
+with open('coins.json','r') as file:
+    cn = json.load(file)
 
+st.write(f"Your amount of coins is 🪙💰 {cn[st.session_state.username]}")    
 def unsub_bec_time():
     st.session_state.premium = False
     
