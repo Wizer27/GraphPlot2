@@ -152,6 +152,18 @@ def buy_premium():
     if final == str(datetime.now()).split()[0]:
         print('Sub should be gone')
         unsub_bec_time()
+def buy_premium_with_coins():
+    with open('coins.json','r') as file:
+        nv = json.load(file)
+    if nv[st.session_state.username] < 100:
+        st.error("You dont have enought coins")
+    else:
+        st.success("Thanks for buying premium for 30 days") 
+        nv[st.session_state.username] = nv[st.session_state.username] - 100
+        with open('coins.json','w') as file:
+            json.dump(nv,file,indent=2)
+            print("Done")       
+            
 def unsubscribe():
     st.session_state.premium = False
     st.success('You unsubscribed')  
@@ -164,6 +176,7 @@ def unsubscribe():
         json.dump(users,file,indent=2) 
 if not st.session_state.premium:
     st.button('Confirm',on_click=buy_premium)
+    st.button("Buy premuim wit coins",on_click=buy_premium_with_coins)
 
 
           
