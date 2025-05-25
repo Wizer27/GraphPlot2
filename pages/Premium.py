@@ -153,6 +153,7 @@ def buy_premium():
         print('Sub should be gone')
         unsub_bec_time()
 def buy_premium_with_coins():
+    st.session_state.premium = True
     with open('coins.json','r') as file:
         nv = json.load(file)
     if nv[st.session_state.username] < 100:
@@ -162,7 +163,15 @@ def buy_premium_with_coins():
         nv[st.session_state.username] = nv[st.session_state.username] - 100
         with open('coins.json','w') as file:
             json.dump(nv,file,indent=2)
-            print("Done")       
+            print("Done") 
+        with open('premium.json','r') as file:
+            data = json.load(file)
+        if st.session_state.premium:
+            data[st.session_state.username] = 'Premium'
+        else:
+            data[st.session_state.username] = 'Standart'
+        with open('premium.json','w') as file:
+            json.dump(data,file,indent = 2)          
             
 def unsubscribe():
     st.session_state.premium = False
