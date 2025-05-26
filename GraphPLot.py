@@ -340,7 +340,7 @@ plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
 plt.axvline(0, color='black', linewidth=1)
 for i in ys:
     plt.plot(x,i)
-        
+
 st.pyplot(figure) 
 # биотовая функция просто для кодировки  
 def bits_machine(s) -> str:

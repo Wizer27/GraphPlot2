@@ -1,4 +1,4 @@
-#!/Users/ivanvinogradov/GraphPlot2/venv/bin/python3.12
+#!/Users/ivanvinogradov/GraphPlot2/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
