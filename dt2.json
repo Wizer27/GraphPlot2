@@ -654,7 +654,8 @@
       "",
       "",
       "exp(-x**2) * sin(10x)",
-      "sin(x)*cos(y) + rand()"
+      "sin(x)*cos(y) + rand()",
+      ""
     ]
   },
   {
