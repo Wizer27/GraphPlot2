@@ -126,7 +126,8 @@ def unsub_bec_time():
         print('DEBUG BASE')
         json.dump(pr,file,indent=2)    
     st.error(f'Your sub is not valid')
-        
+    
+            
 def buy_premium():
     st.session_state.premium = True
     datetim = datetime.now()
@@ -151,9 +152,13 @@ def buy_premium():
     st.success(f"Your free trial is valid until {final}")
     if final == str(datetime.now()).split()[0]:
         print('Sub should be gone')
-        unsub_bec_time()
+        unsub_bec_time()    
 def buy_premium_with_coins():
     st.session_state.premium = True
+    datetim = datetime.now()
+    dt = str(datetim).split()
+    dateoftime = dt[0].split('-')
+    final = dateoftime[0]+'-'+'0'+str(int(dateoftime[1])+1)+'-'+dateoftime[2]
     with open('coins.json','r') as file:
         nv = json.load(file)
     if nv[st.session_state.username] < 100:
@@ -172,7 +177,9 @@ def buy_premium_with_coins():
             data[st.session_state.username] = 'Standart'
         with open('premium.json','w') as file:
             json.dump(data,file,indent = 2)          
-            
+        if final == str(datetime.now()).split()[0]:
+            print('Sub should be gone')
+            unsub_bec_time()     
 def unsubscribe():
     st.session_state.premium = False
     st.success('You unsubscribed')  
@@ -185,7 +192,7 @@ def unsubscribe():
         json.dump(users,file,indent=2) 
 if not st.session_state.premium:
     st.button('Confirm',on_click=buy_premium)
-    st.button("Buy premuim wit coins",on_click=buy_premium_with_coins)
+    st.button("Buy premuim with coins",on_click=buy_premium_with_coins)
 
 
           
