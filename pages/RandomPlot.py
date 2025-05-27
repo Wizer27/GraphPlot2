@@ -141,3 +141,5 @@ try:
 except:
     print("Something went wrong")    
 st.pyplot(figure)    
+def test():
+    pass
