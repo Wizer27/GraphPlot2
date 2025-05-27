@@ -118,10 +118,19 @@ def replace(expression):
     expression = expression.replace('^', '**')
     return expression
 
-
-def random_plot():
-    st.title("Random Graph Plot")
-    figure = plt.figure()
+st.title("Random Graph Plot")
+plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
+plt.axvline(0, color='black', linewidth=1)
+forl = st.text_input("Enter the formula test:")
+figure = plt.figure()
+x = np.linspace(20,20,50)
+try:
     
+    y = safe_evaluate(replace(forl),{'x':x})
+except:
+    print("Error")    
+plt.plot(x,y)
+st.pyplot(figure)
+st.button("Plot random graph")
     
     
