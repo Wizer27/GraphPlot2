@@ -2,13 +2,20 @@
 streamlit==1.32.2
 pandas==2.0.3
 numpy==1.23.5
-numexpr==2.8.4; python_version < '3.12'  # Явное условие для Python < 3.12
-
-# Alternative for Python 3.12+
+numexpr==2.8.4; python_version < '3.12'
 numexpr==2.9.0; python_version >= '3.12'
 
-# Other packages
+# Data processing and visualization
+matplotlib==3.7.2
+plotly==5.18.0
+
+# PDF and text processing
+pypdf==3.17.0
+easyocr==1.7.1  # (commented out in your code but included here)
+regex==2023.10.3
+
+# Utilities
+python-dateutil==2.8.2
 stripe==5.5.0
 wikipedia==1.4.0
-plotly==5.18.0
 setuptools==68.2.2
