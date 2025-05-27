@@ -119,18 +119,25 @@ def replace(expression):
     return expression
 
 st.title("Random Graph Plot")
-plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
-plt.axvline(0, color='black', linewidth=1)
-forl = st.text_input("Enter the formula test:")
 figure = plt.figure()
+forls = ["sin(x)","cos(x)","log(x)","x - 10","x+ 5","1/x","x ** 2","sin(x) - cos(x)"]
+
+
 x = np.linspace(-20,20,50)
+ 
+
+
+if st.button("Plot random graph"):
+    x = np.linspace(-20,20,50)
+    try: 
+        y = safe_evaluate(replace(random.choice(forls)),{'x':x})
+    except:
+        print("Error")     
+plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
+plt.axvline(0, color='black', linewidth=1)  
 try:
-    
-    y = safe_evaluate(replace(forl),{'x':x})
+            
+    plt.plot(x,y)
 except:
-    print("Error")    
-plt.plot(x,y)
-st.pyplot(figure)
-st.button("Plot random graph")
-    
-    
+    print("Something went wrong")    
+st.pyplot(figure)    
