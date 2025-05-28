@@ -180,8 +180,14 @@ with st.sidebar:
     dur = 5
     fs = 44100
     #recording = sd.rec(int(dur * fs), samplerate=fs, channels=2)
-    #sd.wait()
-    #sd.write("C:\\Temp\\mic.wav", recording, fs)
+    #sd.wait()  # Ждём окончания записи
+    # Путь для сохранения (на Mac)
+    #output_path = os.path.expanduser("~/mic_recording.wav")  # Сохранит в домашней папке
+    # Или /tmp/mic_recording.wav (если нужен временный файл)
+
+    # Сохранение в WAV-формате
+    #sd.write(output_path, recording, fs)
+    #print(f"Запись сохранена: {output_path}")
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     logs = []
     coins = 0

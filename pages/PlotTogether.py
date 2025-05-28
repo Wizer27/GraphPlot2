@@ -23,10 +23,7 @@ def register_user(username, password):
     st.session_state.users[username] = password
     
     
-if 'log_conf' not in st.session_state:
-    st.session_state.log_conf = False    
-if 'create_conf' not in st.session_state:
-    st.session_state.create_conf = False
+
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'show_register' not in st.session_state:
@@ -110,37 +107,74 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!") 
-if not st.session_state.create_conf:
-    if not st.session_state.log_conf: 
-        key = st.text_input("Enter the special key for conferencion")
-        nm = st.text_input("Enter the name of conferencion you want to acess")
-        with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json",'r') as file:
-            pltg = json.load(file)
-        if nm in pltg:  
-            if pltg[nm] == key:
-                st.success("Done")
-        st.session_state.create_conf = True  
-    else:
-          cr = st.text_input("Enter the name of conference")   
-          if cr != "":
-              
-                btn = st.button("Confirm") 
-                if btn:
-                    key_bytes = secrets.token_bytes(32)
-                # Закодировать в base64 (для удобства хранения)
+option = st.radio("Choose an option:", 
+                 ["Access existing conference", "Create new conference"])
 
-                    # Или в hex-формате
-                    key_hex = key_bytes.hex()
-                    print("Hex key:", key_hex) 
-                    st.success(f"Your key {key_hex}")   
-                    with open('/Users/ivanvinogradov/GraphPlot2/pages/pltg.json','r') as file:
-                        pl = json.load(file)
-                    pl[cr] = key_hex
-                    with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json",'w') as file:
-                        json.dump(pl,file,indent=2)
-                    
-    st.stop()      
-st.write("Or create a conference")    
-
-            
+if option == "Access existing conference":
+    st.session_state.log_conf = True
+    st.session_state.create_conf = False
     
+    st.subheader("Access Conference")
+    key = st.text_input("Enter the special key for conference")
+    nm = st.text_input("Enter the name of conference you want to access")
+    
+    if st.button("Access"):
+        try:
+            with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json", 'r') as file:
+                pltg = json.load(file)
+            
+            if nm in pltg:
+                if pltg[nm] == key:
+                    st.success("Access granted! Conference loaded successfully.")
+                    # Here you would add your logic for what happens after successful access
+                    st.session_state.create_conf = True
+                else:
+                    st.error("Invalid key for this conference.")
+            else:
+                st.error("Conference with this name doesn't exist.")
+        except FileNotFoundError:
+            st.error("Conference database not found.")
+        except json.JSONDecodeError:
+            st.error("Error reading conference database.")
+
+elif option == "Create new conference":
+    st.session_state.create_conf = True
+    st.session_state.log_conf = False
+    
+    st.subheader("Create New Conference")
+    cr = st.text_input("Enter the name for new conference")
+    
+    if cr:
+        if st.button("Create Conference"):
+            if not cr.strip():
+                st.warning("Conference name cannot be empty!")
+            else:
+                try:
+                    # Generate secure key
+                    key_bytes = secrets.token_bytes(32)
+                    key_hex = key_bytes.hex()
+                    
+                    # Load existing conferences
+                    try:
+                        with open('/Users/ivanvinogradov/GraphPlot2/pages/pltg.json', 'r') as file:
+                            pl = json.load(file)
+                    except FileNotFoundError:
+                        pl = {}
+                    except json.JSONDecodeError:
+                        pl = {}
+                    
+                    # Check if conference name already exists
+                    if cr in pl:
+                        st.error("Conference with this name already exists!")
+                    else:
+                        # Add new conference
+                        pl[cr] = key_hex
+                        
+                        # Save back to file
+                        with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json", 'w') as file:
+                            json.dump(pl, file, indent=2)
+                        
+                        st.success(f"Conference '{cr}' created successfully!")
+                        st.info(f"Your access key (save this!): {key_hex}")
+                except Exception as e:
+                    st.error(f"An error occurred: {str(e)}")
