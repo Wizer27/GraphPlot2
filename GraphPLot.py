@@ -177,6 +177,11 @@ with st.sidebar:
     grid = st.checkbox("Grid")
     x = linspace(x_min, x_max, steps) 
     ys = [] #список всех формул
+    dur = 5
+    fs = 44100
+    #recording = sd.rec(int(dur * fs), samplerate=fs, channels=2)
+    #sd.wait()
+    #sd.write("C:\\Temp\\mic.wav", recording, fs)
     count = st.number_input("How many Formulas: ",min_value = 1,max_value = 20)
     logs = []
     coins = 0
