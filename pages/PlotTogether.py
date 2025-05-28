@@ -126,8 +126,9 @@ if option == "Access existing conference":
             if nm in pltg:
                 if pltg[nm] == key:
                     st.success("Access granted! Conference loaded successfully.")
-                    # Here you would add your logic for what happens after successful access
                     st.session_state.create_conf = True
+                    count = st.number_input("How many formulas: ")
+                    
                 else:
                     st.error("Invalid key for this conference.")
             else:
