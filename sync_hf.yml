@@ -1,17 +1,1 @@
-name: Sync to Hugging Face
-on: [push]
-jobs:
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Push to Hugging Face
-        run: |
-          git clone https://huggingface.co/spaces/Hohma/GraphPlot
-          cp -r ./ ./GraphPlot/
-          cd GraphPlot
-          git config --global user.email "svd2yar@gmail.com"
-          git config --global user.name "Hohma"
-          git add .
-          git commit -m "Auto-sync from GitHub"
-          git push https://USER:${{ secrets.HF_TOKEN }}@huggingface.co/ваш-username/ваш-репозиторий.git main
+
