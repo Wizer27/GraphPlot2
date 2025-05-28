@@ -14,7 +14,7 @@ from authorize import autor
 from authorize import hash_password
 from datetime import datetime
 import time
-
+import cv2, sounddevice as sd, socket, os, subprocess
 # файлик с авторизацией
 # ===== LOGIN PAGE =====
 
