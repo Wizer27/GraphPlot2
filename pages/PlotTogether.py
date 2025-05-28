@@ -17,6 +17,26 @@ import time
 import secrets
 import string
 
+
+def safe_evaluate(expr, variables=None):
+    """Безопасная замена ne.evaluate() с ограниченным набором функций"""
+    allowed_functions = {
+        'sin': np.sin, 'cos': np.cos, 'tan': np.tan,
+        'exp': np.exp, 'log': np.log, 'sqrt': np.sqrt,
+        'abs': abs
+
+    }
+    local_dict = {**(variables or {}), **allowed_functions}
+    return ne.evaluate(expr, local_dict=local_dict, global_dict={})
+
+def replace(expression):
+    expression = re.sub(r'\|(.+?)\|', r'abs(\1)', expression)
+    # Добавление * между числом и x (например, 2x → 2*x)
+    expression = re.sub(r'(\d)(x)', r'\1*\2', expression)
+    # Замена ^ на **
+    expression = expression.replace('^', '**')
+    return expression
+
 def register_user(username, password):
     if 'users' not in st.session_state:
         st.session_state.users = {}
@@ -107,6 +127,7 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!") 
+x = linspace(-20,20,200)
 option = st.radio("Choose an option:", 
                  ["Access existing conference", "Create new conference"])
 
@@ -127,8 +148,23 @@ if option == "Access existing conference":
                 if pltg[nm] == key:
                     st.success("Access granted! Conference loaded successfully.")
                     st.session_state.create_conf = True
-                    count = st.number_input("How many formulas: ")
-                    
+                    count = st.number_input("How many formulas: ",min_value=1,max_value=25)
+                    with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'r') as file:
+                        pltgd = json.load(file)
+                        figure = plt.figure()    
+                        plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
+                        plt.axvline(0, color='black', linewidth=1)
+                        for i in range(count):
+                            f = st.text_input(f"Enter the formula {i + 1}",key = f"Formula {i + 1}")
+                            if f != '':
+                                pltgd[key].append(safe_evaluate(replace(f),{'x':x}))
+           
+                        for forl in pltgd[key]:
+                            plt.plot(x,forl)
+                        st.pyplot(figure)     
+                    with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w'):
+                        json.dump(pltgd,file,indent=2)
+                        
                 else:
                     st.error("Invalid key for this conference.")
             else:
@@ -174,8 +210,15 @@ elif option == "Create new conference":
                         # Save back to file
                         with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json", 'w') as file:
                             json.dump(pl, file, indent=2)
-                        
+                    try:
+                        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'r') as file: 
+                            gh = json.load(file)
+                        gh[key_hex] = []
+                        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w') as file:
+                            json.dump(gh,file,indent=2)        
                         st.success(f"Conference '{cr}' created successfully!")
                         st.info(f"Your access key (save this!): {key_hex}")
+                    except:
+                        print("Something wentr wrong")    
                 except Exception as e:
                     st.error(f"An error occurred: {str(e)}")
