@@ -162,7 +162,7 @@ if option == "Access existing conference":
                         for forl in pltgd[key]:
                             plt.plot(x,forl)
                         st.pyplot(figure)     
-                    with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w'):
+                    with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w') as file:
                         json.dump(pltgd,file,indent=2)
                         
                 else:
@@ -210,15 +210,15 @@ elif option == "Create new conference":
                         # Save back to file
                         with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json", 'w') as file:
                             json.dump(pl, file, indent=2)
-                    try:
-                        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'r') as file: 
-                            gh = json.load(file)
-                        gh[key_hex] = []
-                        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w') as file:
-                            json.dump(gh,file,indent=2)        
-                        st.success(f"Conference '{cr}' created successfully!")
-                        st.info(f"Your access key (save this!): {key_hex}")
-                    except:
-                        print("Something wentr wrong")    
+                        try:
+                            with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'r') as file: 
+                                gh = json.load(file)
+                            gh[key_hex] = []
+                            with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w') as file:
+                                json.dump(gh,file,indent=2)        
+                            st.success(f"Conference '{cr}' created successfully!")
+                            st.info(f"Your access key (save this!): {key_hex}")
+                        except:
+                            print("Something wentr wrong")    
                 except Exception as e:
                     st.error(f"An error occurred: {str(e)}")
