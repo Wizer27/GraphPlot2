@@ -163,6 +163,7 @@ def buy_premium_with_coins():
         nv = json.load(file)
     if nv[st.session_state.username] < 100:
         st.error("You dont have enought coins")
+        st.session_state.premium = False
     else:
         st.success("Thanks for buying premium for 30 days") 
         nv[st.session_state.username] = nv[st.session_state.username] - 100
@@ -191,7 +192,7 @@ def unsubscribe():
     with open('premium.json','w') as file:
         json.dump(users,file,indent=2) 
 if not st.session_state.premium:
-    st.button('Confirm',on_click=buy_premium)
+    #st.button('Confirm',on_click=buy_premium)
     st.button("Buy premuim with coins",on_click=buy_premium_with_coins)
 
 
