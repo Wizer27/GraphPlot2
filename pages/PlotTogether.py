@@ -169,7 +169,7 @@ if option == "Access existing conference":
             f = st.text_input(f"Enter the formula {i + 1}", key=f"Formula {i + 1}")
             if f != '':
                 try:
-                    pltgd[key].append(f)
+                    pltgd[key].append(f.lower())
                 except:
                     st.error("Invalid formula syntax")
         print(pltgd[key])

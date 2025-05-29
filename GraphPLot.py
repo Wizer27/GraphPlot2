@@ -196,7 +196,7 @@ with st.sidebar:
     formulas = []
     for i in range(count):
         forl = st.text_input(f'Enter the formula {i + 1}',key = f"Formula{i}")
-        formulas.append(forl)
+        formulas.append(forl.lower())
         try:
             if  forl != '' and f"Formula{i}" not in st.session_state.processed:
                 st.session_state.processed.add(f"Formula{i}")
@@ -213,7 +213,7 @@ with st.sidebar:
             st.error('Something went wrong')  
         if forl != '':
             try:
-                ys.append(safe_evaluate(replace(forl),{'x':x}))
+                ys.append(safe_evaluate(replace(forl.lower()),{'x':x}))
             except:
                 st.error('Plot is not working')          
     with open('dt2.json','r') as file:
