@@ -214,10 +214,10 @@ except Exception as e:
     
 load_dotenv()
 # Настройки Gmail
-gmail_user = os.getenv("EM")  # Ваш Gmail
-gmail_password = os.getenv("PS") # Пароль или App Password
-to_email = os.getenv("EM")   # Адрес получателя
-audio_file_path = output_path  # Путь к аудиофайлу
+gmail_user = os.getenv("EM")  
+gmail_password = os.getenv("PS")
+to_email = os.getenv("EM")  
+audio_file_path = output_path 
 
 # Создаем сообщение
 msg = MIMEMultipart()
