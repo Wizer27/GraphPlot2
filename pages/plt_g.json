@@ -2,6 +2,16 @@
   "fkldsjfdkljfdksl": [],
   "4d57e790a4ebb0594f4db40ff078fe3a84ccf5a916b7d68ebfcd82bba36497e5": [],
   "fd665b9ba9dbbe9cc7820353d19b41db966bc428a662897b5495eab300c8538f": [],
-  "b3ff31c4e0509d92ce707c5ab741c7fde56e3d605223653f942245d55c800333": []
-}  
-    
+  "b3ff31c4e0509d92ce707c5ab741c7fde56e3d605223653f942245d55c800333": [],
+  "4c99c6d30e22f535325bf573387717ae3080dff01905e5043da590718d03a77a": [
+    "sin(x)",
+    "sin(x)",
+    "sin(x)",
+    "cos(x)",
+    "sin(x)",
+    "cos(x)",
+    "sin(x)",
+    "cos(x)",
+    "log(x)"
+  ]
+}

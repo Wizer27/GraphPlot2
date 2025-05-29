@@ -167,14 +167,14 @@ if option == "Access existing conference":
         
         for i in range(count):
             f = st.text_input(f"Enter the formula {i + 1}", key=f"Formula {i + 1}")
-            if f:
+            if f != '':
                 try:
-                    pltgd[key].append(safe_evaluate(replace(f), {'x': x}))
+                    pltgd[key].append(f)
                 except:
                     st.error("Invalid formula syntax")
-        
+        print(pltgd[key])
         for formula in pltgd[key]:
-            plt.plot(x, formula)
+            plt.plot(x, safe_evaluate(replace(formula),{'x': x}))
         st.pyplot(figure)
         
         with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json", 'w') as file:
