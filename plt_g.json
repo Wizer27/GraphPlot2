@@ -13,6 +13,14 @@
     "sin(x)",
     "cos(x)",
     "log(x)",
-    "x-10"
+    "x-10",
+    "log(x)",
+    "x + 8"
+  ],
+  "e029d5adc827c444ddcfef01d5f0c44002ca1c067a80fb7426a97582f37b57d4": [
+    "sin(x)",
+    "sin(x)",
+    "sin(x)",
+    "x - 10"
   ]
 }

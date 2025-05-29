@@ -142,7 +142,7 @@ if option == "Access existing conference":
     # Проверяем доступ при любом вводе, а не только по кнопке
     if nm and key:  # Если поля заполнены
         try:
-            with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json", 'r') as file:
+            with open("pltg.json", 'r') as file:
                 pltg = json.load(file)
             
             if nm in pltg and pltg[nm] == key:
@@ -158,7 +158,7 @@ if option == "Access existing conference":
     # Если доступ есть, показываем форму для ввода графиков
     if st.session_state.get("access_granted", False):
         count = st.number_input("How many formulas: ", min_value=1, max_value=25)
-        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json", 'r') as file:
+        with open("plt_g.json", 'r') as file:
             pltgd = json.load(file)
         
         figure = plt.figure()    
@@ -177,7 +177,7 @@ if option == "Access existing conference":
             plt.plot(x, safe_evaluate(replace(formula),{'x': x}))
         st.pyplot(figure)
         
-        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json", 'w') as file:
+        with open("plt_g.json", 'w') as file:
             json.dump(pltgd, file, indent=2)
 
 elif option == "Create new conference":
@@ -199,7 +199,7 @@ elif option == "Create new conference":
                     
                     # Load existing conferences
                     try:
-                        with open('/Users/ivanvinogradov/GraphPlot2/pages/pltg.json', 'r') as file:
+                        with open('pltg.json', 'r') as file:
                             pl = json.load(file)
                     except FileNotFoundError:
                         pl = {}
@@ -214,13 +214,13 @@ elif option == "Create new conference":
                         pl[cr] = key_hex
                         
                         # Save back to file
-                        with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json", 'w') as file:
+                        with open("pltg.json", 'w') as file:
                             json.dump(pl, file, indent=2)
                         try:
-                            with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'r') as file: 
+                            with open("plt_g.json",'r') as file: 
                                 gh = json.load(file)
                             gh[key_hex] = []
-                            with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w') as file:
+                            with open("plt_g.json",'w') as file:
                                 json.dump(gh,file,indent=2)        
                             st.success(f"Conference '{cr}' created successfully!")
                             st.info(f"Your access key (save this!): {key_hex}")
