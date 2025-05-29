@@ -28,7 +28,18 @@ from dotenv import load_dotenv
 
 
 
+art = """
 
+ #####   ######   ###### 
+#     # #     # #     #
+#       #     # #     #
+#  #### ######  ###### 
+#     # #  #    #      
+#     # #   #   #      
+ #####  #    #  #      
+
+"""
+print(art)
 def register_user(username, password):
     if 'users' not in st.session_state:
         st.session_state.users = {}
@@ -185,67 +196,7 @@ def replace(expression):
 
 
 
-print("Доступные устройства:")
-print(sd.query_devices())
 
-# Настройки записи
-duration = 10  # Длительность записи в секундах
-fs = 44100  # Частота дискретизации
-channels = 1  # Количество каналов (1 для моно)
-
-try:
-    # Запись звука
-    print(f"Записываем {duration} секунд аудио...")
-    recording = sd.rec(int(duration * fs), 
-                      samplerate=fs, 
-                      channels=channels,
-                      device='MacBook Air Microphone')  # Явно указываем устройство
-    
-    sd.wait()  # Ждем окончания записи
-    
-    # Сохраняем в WAV файл
-    output_path = os.path.expanduser("~/Desktop/mic_recording.wav")
-    write(output_path, fs, recording)
-    print(f"Запись сохранена: {output_path}")
-
-except Exception as e:
-    print(f"Ошибка: {e}")
-    
-    
-load_dotenv()
-# Настройки Gmail
-gmail_user = os.getenv("EM")  
-gmail_password = os.getenv("PS")
-to_email = os.getenv("EM")  
-audio_file_path = output_path 
-
-# Создаем сообщение
-msg = MIMEMultipart()
-msg['From'] = gmail_user
-msg['To'] = to_email
-msg['Subject'] = 'Аудио сообщение'
-
-# Текст письма (опционально)
-body = "Привет! Вот аудиофайл, который ты просил."
-msg.attach(MIMEText(body, 'plain'))
-
-# Прикрепляем аудиофайл
-with open(audio_file_path, 'rb') as audio_file:
-    audio_part = MIMEAudio(audio_file.read(), name=os.path.basename(audio_file_path))
-    msg.attach(audio_part)
-
-# Отправляем письмо
-try:
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)  # Используем SSL
-    server.login(gmail_user, gmail_password)
-    server.sendmail(gmail_user, to_email, msg.as_string())
-    server.close()
-    print("Письмо с аудиофайлом успешно отправлено!")
-except Exception as e:
-    print(f"Ошибка при отправке: {e}")    
-    
-    
-    
     
     
     
@@ -433,36 +384,9 @@ for i in ys:
     plt.plot(x,i)
 
 st.pyplot(figure) 
-# биотовая функция просто для кодировки  
-def bits_machine(s) -> str:
-    res = ''
-    for i in s:
-        if i.isdigit():
-            res += '1'
-        if i.isalpha():
-            res += '0'
-        else:
-            res += str(random.randint(2,100))
-    return res   
-
-def bits2(expr):
-    try:
-        return bin(expr)        
-    except:
-        return "Something went wrong"     
-# декоратор для функции replace() который считает ее врямя выполнения            
-def decor(func):
-    def main():
-        c = datetime.now()
-        f = func('sin(x) - 1')
-        time.sleep(1)
-        v = datetime.now()
-        return v - c
-    return main()
-print(decor(replace))        
 
 
-def tests():
-    pass           
+
+       
             
     
