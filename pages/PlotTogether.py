@@ -139,40 +139,46 @@ if option == "Access existing conference":
     key = st.text_input("Enter the special key for conference")
     nm = st.text_input("Enter the name of conference you want to access")
     
-    if st.button("Access"):
+    # Проверяем доступ при любом вводе, а не только по кнопке
+    if nm and key:  # Если поля заполнены
         try:
             with open("/Users/ivanvinogradov/GraphPlot2/pages/pltg.json", 'r') as file:
                 pltg = json.load(file)
             
-            if nm in pltg:
-                if pltg[nm] == key:
-                    st.success("Access granted! Conference loaded successfully.")
-                    st.session_state.create_conf = True
-                    count = st.number_input("How many formulas: ",min_value=1,max_value=25)
-                    with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'r') as file:
-                        pltgd = json.load(file)
-                        figure = plt.figure()    
-                        plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
-                        plt.axvline(0, color='black', linewidth=1)
-                        for i in range(count):
-                            f = st.text_input(f"Enter the formula {i + 1}",key = f"Formula {i + 1}")
-                            if f != '':
-                                pltgd[key].append(safe_evaluate(replace(f),{'x':x}))
-           
-                        for forl in pltgd[key]:
-                            plt.plot(x,forl)
-                        st.pyplot(figure)     
-                    with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json",'w') as file:
-                        json.dump(pltgd,file,indent=2)
-                        
-                else:
-                    st.error("Invalid key for this conference.")
+            if nm in pltg and pltg[nm] == key:
+                st.session_state.access_granted = True  # Сохраняем статус доступа
+                st.session_state.conference_name = nm
+                st.session_state.conference_key = key
+                st.success("Access granted! Conference loaded successfully.")
             else:
-                st.error("Conference with this name doesn't exist.")
+                st.error("Invalid key or conference name.")
         except FileNotFoundError:
             st.error("Conference database not found.")
-        except json.JSONDecodeError:
-            st.error("Error reading conference database.")
+    
+    # Если доступ есть, показываем форму для ввода графиков
+    if st.session_state.get("access_granted", False):
+        count = st.number_input("How many formulas: ", min_value=1, max_value=25)
+        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json", 'r') as file:
+            pltgd = json.load(file)
+        
+        figure = plt.figure()    
+        plt.axhline(0, color='black', linewidth=1)
+        plt.axvline(0, color='black', linewidth=1)
+        
+        for i in range(count):
+            f = st.text_input(f"Enter the formula {i + 1}", key=f"Formula {i + 1}")
+            if f:
+                try:
+                    pltgd[key].append(safe_evaluate(replace(f), {'x': x}))
+                except:
+                    st.error("Invalid formula syntax")
+        
+        for formula in pltgd[key]:
+            plt.plot(x, formula)
+        st.pyplot(figure)
+        
+        with open("/Users/ivanvinogradov/GraphPlot2/pages/plt_g.json", 'w') as file:
+            json.dump(pltgd, file, indent=2)
 
 elif option == "Create new conference":
     st.session_state.create_conf = True
