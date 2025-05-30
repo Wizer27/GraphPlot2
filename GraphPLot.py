@@ -204,7 +204,7 @@ with st.sidebar:
     x_min = st.number_input("Minimum", value=-20)
     x_max = st.number_input("Maximum", value=20)
     steps = st.slider("Amount of dots", 50, 500)
-    d_gr = st.text_input("Enter the fucntion for 3d plot:",value = 'x')
+    #d_gr = st.text_input("Enter the fucntion for 3d plot:",value = 'x')
     grid = st.checkbox("Grid")
     x = linspace(x_min, x_max, steps) 
     ys = [] #список всех формул
@@ -298,20 +298,20 @@ if st.session_state.username in fil:
     
     st.write(f"Your amount of coins is 🪙💰 {fil[st.session_state.username]}")    
 
-            
-x4 = np.linspace(x_min,x_max,steps)
-try:
-    y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
-except Exception as e:
-    st.error(f"No function for {e}")
-    y4 = np.zeros_like(x4)     
-x4, y4 = np.meshgrid(x4, y4)
-z = np.sin(np.sqrt(x4**2 + y4**2))
-fiig = plt.figure()
-ax = fiig.add_subplot(projection='3d')
-ax.plot_surface(x4, y4, z, cmap='viridis')
-st.pyplot(fiig)             
-
+        
+#x4 = np.linspace(x_min,x_max,steps)
+#try:
+    #y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
+#except Exception as e:
+ #   st.error(f"No function for {e}")
+  ##  y4 = np.zeros_like(x4)     
+#x4, y4 = np.meshgrid(x4, y4)
+#z = np.sin(np.sqrt(x4**2 + y4**2))
+#fiig = plt.figure()
+#ax = fiig.add_subplot(projection='3d')
+#ax.plot_surface(x4, y4, z, cmap='viridis')
+#st.pyplot(fiig)             
+###
 
 
 
