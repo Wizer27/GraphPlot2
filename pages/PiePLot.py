@@ -98,6 +98,9 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!")       
+def exi():
+    st.session_state.logged_in = False
+ex = st.button("Выйти из аккаунта",on_click=exi)
 if not st.session_state.premium:
     st.title('PiePlot')
     st.error('This is a Premium function')

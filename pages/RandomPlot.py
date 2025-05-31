@@ -107,7 +107,9 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!")  
-
+def exi():
+    st.session_state.logged_in = False
+ex = st.button("Выйти из аккаунта",on_click=exi)
 def safe_evaluate(expr, variables=None):
     """Безопасная замена ne.evaluate() с ограниченным набором функций"""
     allowed_functions = {

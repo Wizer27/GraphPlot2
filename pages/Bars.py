@@ -95,6 +95,9 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!")       
+def exi():
+    st.session_state.logged_in = False
+ex = st.button("Выйти из аккаунта",on_click=exi)
 with st.sidebar:
     count  = st.number_input("How many bars?",min_value = 1,max_value = 20,step = 1)
     lab = []

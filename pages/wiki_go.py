@@ -93,7 +93,10 @@ if not st.session_state.logged_in:
     
     st.stop()
 # Основной интерфейс после авторизации
-st.success(f"✅ Welcome, {st.session_state.username}!")       
+st.success(f"✅ Welcome, {st.session_state.username}!")   
+def exi():
+    st.session_state.logged_in = False
+ex = st.button("Выйти из аккаунта",on_click=exi) 
 st.markdown("""Wikipedia Search App
 This is a simple Streamlit application that allows users to search for any topic using the Wikipedia API.
 The app displays a summary of the requested topic or shows an error message if the topic is not found.""")
