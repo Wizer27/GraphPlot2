@@ -131,6 +131,10 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!")  
+ex = st.button("Выйти из аккаунта")
+if ex:
+    st.session_state.logged_in = False
+    st.session_state.show_register = False
 with open('coins.json','r') as t:
     ust = json.load(t)
         

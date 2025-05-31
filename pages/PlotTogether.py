@@ -127,6 +127,10 @@ if not st.session_state.logged_in:
     st.stop()
 # Основной интерфейс после авторизации
 st.success(f"✅ Welcome, {st.session_state.username}!") 
+exit = st.button("Выйти из аккаунта")
+if exit:
+    st.session_state.logged_in = False
+    st.session_state.show_register = False
 x = linspace(-20,20,200)
 option = st.radio("Choose an option:", 
                  ["Access existing conference", "Create new conference"])
