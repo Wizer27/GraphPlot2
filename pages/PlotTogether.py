@@ -16,7 +16,7 @@ from datetime import datetime
 import time
 import secrets
 import string
-
+import subprocess
 
 def safe_evaluate(expr, variables=None):
     """Безопасная замена ne.evaluate() с ограниченным набором функций"""
@@ -182,7 +182,14 @@ if option == "Access existing conference":
         
         with open("plt_g.json", 'w') as file:
             json.dump(pltgd, file, indent=2)
-
+        def refr():
+            with open("plt_g.json", 'r') as file:
+                pltgd = json.load(file)
+            for formula in pltgd[key]:
+                plt.plot(x, safe_evaluate(replace(formula),{'x': x}))
+            st.pyplot(figure)    
+                
+        obnpv = st.button("Refresh plot",on_click=refr)
 elif option == "Create new conference":
     st.session_state.create_conf = True
     st.session_state.log_conf = False
