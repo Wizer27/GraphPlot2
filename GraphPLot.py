@@ -248,7 +248,7 @@ with st.sidebar:
         if forl != '':
             try:
                 ys.append(safe_evaluate(replace(forl.lower()),{'x':x}))
-            except:
+            except: 
                 st.error('Plot is not working')          
     with open('dt2.json','r') as file:
         try:
