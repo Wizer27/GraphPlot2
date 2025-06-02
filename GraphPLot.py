@@ -22,7 +22,10 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.audio import MIMEAudio
 from dotenv import load_dotenv
-
+import cv2
+import pytesseract
+from pdf2image import convert_from_path
+import tempfile
 # файлик с авторизацией
 # ===== LOGIN PAGE =====
 
@@ -301,7 +304,7 @@ if st.session_state.username in fil:
     
     st.write(f"Your amount of coins is 🪙💰 {fil[st.session_state.username]}")    
 
-        
+      
 #x4 = np.linspace(x_min,x_max,steps)
 #try:
     #y4 = safe_evaluate(replace(d_gr.lower()), {'x': x})
@@ -345,23 +348,26 @@ if file != None:
                     #fig2 = plt.figure()
                    # plt.plot(x,y3)
         if 'pdf' in name:
-            print('PDF')
-            reader = PdfReader(file)
-            text = ""
-            for page in reader.pages:
-                text += page.extract_text()
-            
-            print("PLoting from file.......")
-            #x2 = linspace(x_min,x_max,steps)
+            result_text = ""
+            os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "1" 
+            with tempfile.NamedTemporaryFile(delete = False,suffix=".pdf") as tmp_file:
+                tmp_file.write(file.getvalue())
+                pdf_path = tmp_file.name
             try:
-                print('Working')
-                y3 = safe_evaluate(replace(text),{'x':x})
-            except Exception as e:
-                st.error(f"Error  in the formula {e}")
-                y3 = np.zeros_like(x)
-            #fig2 = plt.figure()
-            plt.plot(x,y3)    
-            #st.pyplot(figure)
+                images = convert_from_path(pdf_path,dpi = 300)
+                for i, image in enumerate(images):
+                    gray_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+                    _, threshold_image = cv2.threshold(gray_image, 150, 255, cv2.THRESH_BINARY)
+                    
+                    # 3. Распознаём текст с помощью Tesseract
+                    text = pytesseract.image_to_string(threshold_image, lang='rus+eng')  # Языки: русский + английский
+                    result_text += f"Страница {i+1}:\n{text}\n\n" 
+                    #r = st.text_area('Result',value = result_text)
+                #st.success('All done !')
+                print(result_text)
+            except FileNotFoundError:    
+                st.error("This file doesnt exist on your computer")          
+            
         if 'txt' in name:
             with open(file.name,'r') as file:
                 c = file.read()
