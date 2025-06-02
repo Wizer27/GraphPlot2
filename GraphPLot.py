@@ -397,6 +397,7 @@ plt.axvline(0, color='black', linewidth=1)
 for i in ys:
     plt.plot(x,i)
 
+
 st.pyplot(figure) 
 
 
