@@ -365,6 +365,11 @@ if file != None:
                     #r = st.text_area('Result',value = result_text)
                 #st.success('All done !')
                 print(result_text)
+                for i in result_text.split():
+                    try:
+                        plt.plot(safe_evaluate(replace(i),{"x":x}))
+                    except:
+                        print(f"Formula {i} is not plotting")    
             except FileNotFoundError:    
                 st.error("This file doesnt exist on your computer")          
             
