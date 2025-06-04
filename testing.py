@@ -51,8 +51,7 @@ def ploting_with_dots(x,y):
     print(x)
     print(y)
     for i in range(len(y)):
-        plt.scatter(x[i],y[i])    
-       
+        plt.scatter(x[i],y[i])      
       
     st.pyplot(fig)  
     
