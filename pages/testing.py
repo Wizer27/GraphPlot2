@@ -46,24 +46,18 @@ def ploting_with_dots(x,y):
     mny = min(y)
     print(f"Minimum of y is {mny}")
     print(f"Maximum if y is {mxy}")
-    for i in range(len(x)):
-        x[i] = int(x[i])
-    x = set(x)
-    y2 = []
+    #x2 = set(x2)
+    #y2 = set(y2)
+    print(x)
+    print(y)
     for i in range(len(y)):
-        y2.append(int(y[i]))
-    y2 = set(y2)
-    for i in y2:
-        for j in x:
-            if (i % 2 == 0 and j % 2 == 0):   
-                plt.scatter(i,j)     
+        plt.scatter(x[i],y[i])    
        
       
     st.pyplot(fig)  
     
 if forl != "":    
     try:
-       
         ploting_with_dots(x,y)   
     except Exception as e:
         print(f"Error {e}")          
