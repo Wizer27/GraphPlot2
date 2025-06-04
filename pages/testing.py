@@ -63,7 +63,7 @@ def ploting_with_dots(x,y):
     
 if forl != "":    
     try:
-            
-        ploting_with_dots(x,y)        
+       
+        ploting_with_dots(x,y)   
     except Exception as e:
         print(f"Error {e}")          
