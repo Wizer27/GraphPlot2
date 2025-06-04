@@ -52,9 +52,10 @@ try:
     for i in range(len(y)):
         y2.append(int(y[i]))
     y2 = set(y2)
-    #for i in y2:
-     #   for j in x:
-      #      plt.scatter(i,j)     
+    for i in y2:
+        for j in x:
+            if i % 2 == 0 and j % 2 == 0:   
+                plt.scatter(i,j)     
 except Exception as e:
     print(f"Exception {e}")       
       
