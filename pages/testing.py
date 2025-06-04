@@ -45,9 +45,15 @@ try:
     mny = min(y)
     print(f"Minimum of y is {mny}")
     print(f"Maximum if y is {mxy}")
-    for i in range(1,10):
-        for j in range(1,20):
-            plt.scatter(i,j)
+    for i in range(len(x)):
+        x[i] = int(x[i])
+    x = set(x)
+    for i in range(len(y)):
+        y[i] = int(y[i])
+    y = set(y)
+    for i in y:
+        for j in x:
+            plt.scatter(i,j)     
 except Exception as e:
     print(f"Exception {e}")       
       
