@@ -396,7 +396,7 @@ plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
 plt.axvline(0, color='black', linewidth=1)
 for i in ys:
     plt.plot(x,i)
-print(f"Список всех графиков: {ys}")
+
 
 
 st.pyplot(figure) 
