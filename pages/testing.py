@@ -41,6 +41,14 @@ try:
     x = np.linspace(-20,20,450)
     y = safe_evaluate(replace(forl),{'x':x})
     plt.plot(x,y)  
+    mxy = max(y)
+    mny = min(y)
+    print(f"Minimum of y is {mny}")
+    print(f"Maximum if y is {mxy}")
+    for i in range(1,10):
+        for j in range(1,20):
+            plt.scatter(i,j)
 except Exception as e:
-    print(f"Exception {e}")            
+    print(f"Exception {e}")       
+      
 st.pyplot(fig)            
