@@ -36,10 +36,11 @@ with st.sidebar:
     forl = st.text_input("Enter the formula")
 fig = plt.figure()
 plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
-plt.axvline(0, color='black', linewidth=1)    
-try:   
-    x = np.linspace(-20,20,450)
-    y = safe_evaluate(replace(forl),{'x':x})
+plt.axvline(0, color='black', linewidth=1)   
+x = np.linspace(-20,20,450)
+if forl != "":
+    y = safe_evaluate(replace(forl),{'x':x}) 
+def ploting_with_dots(x,y):  
     plt.plot(x,y)  
     mxy = max(y)
     mny = min(y)
@@ -54,9 +55,15 @@ try:
     y2 = set(y2)
     for i in y2:
         for j in x:
-            if i % 2 == 0 and j % 2 == 0:   
+            if (i % 2 == 0 and j % 2 == 0):   
                 plt.scatter(i,j)     
-except Exception as e:
-    print(f"Exception {e}")       
+       
       
-st.pyplot(fig)            
+    st.pyplot(fig)  
+    
+if forl != "":    
+    try:
+            
+        ploting_with_dots(x,y)        
+    except Exception as e:
+        print(f"Error {e}")          
