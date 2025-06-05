@@ -115,7 +115,7 @@ with st.sidebar:
     for dot in range(count + 1):
         x = st.text_input(f'Dot {dot+ 1}',key = f"Dotx {dot}",placeholder= '1,2')
         if x  != '':
-            try:
+            try:   
                 x = x.split(',')
                 xs.append(int(x[0]))
                 ys.append(int(x[1]))
