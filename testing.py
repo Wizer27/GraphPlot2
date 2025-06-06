@@ -39,24 +39,19 @@ plt.axhline(0, color='black', linewidth=1)  # Ось X (y = 0)
 plt.axvline(0, color='black', linewidth=1)   
 x = np.linspace(-20,20,450)
 if forl != "":
-    y = safe_evaluate(replace(forl),{'x':x}) 
-def ploting_with_dots(x,y):  
-    plt.plot(x,y)  
-    mxy = max(y)
-    mny = min(y)
-    print(f"Minimum of y is {mny}")
-    print(f"Maximum if y is {mxy}")
-    #x2 = set(x2)
-    #y2 = set(y2)
-    print(x)
-    print(y)
-    for i in range(len(y)):
-        plt.scatter(x[i],y[i])      
-      
-    st.pyplot(fig)  
-    
-if forl != "":    
     try:
-        ploting_with_dots(x,y)   
-    except Exception as e:
-        print(f"Error {e}")          
+        y = safe_evaluate(replace(forl),{'x':x}) 
+    except:
+        st.error("Something went wrong")    
+if forl != "":
+    try:
+        
+        dty = [forl]
+        for i in range(1,10):
+            dty.append(forl + '-' + str(i))
+        for f in dty:
+            plt.plot(safe_evaluate(replace(f.lower()),{'x':x}),x)
+    except:
+        st.error("Something went wrong")    
+st.pyplot(fig)    
+         
