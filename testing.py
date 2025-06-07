@@ -47,7 +47,7 @@ if forl != "":
     try:
         
         dty = [forl]
-        for i in range(1,10):
+        for i in range(1,100):
             dty.append(forl + '-' + str(i))
         for f in dty:
             plt.plot(safe_evaluate(replace(f.lower()),{'x':x}),x)
