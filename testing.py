@@ -54,4 +54,5 @@ if forl != "":
     except:
         st.error("Something went wrong")    
 st.pyplot(fig)    
-         
+def test():
+    pass         
