@@ -1,3 +1,4 @@
 micro.py
 .env
-venv
+venv/
+.venv/
