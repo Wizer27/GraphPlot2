@@ -26,3 +26,5 @@ Just enter any formula and see the graph instantly rendered in your browser.
 ```bash
 pip install -r requirements.txt
 
+streamlit run GraphPlot.py
+
